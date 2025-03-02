@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1</title>
+    <link rel="stylesheet" href="LevelStyle.css">
+    <script src="GameScript.js"></script>
+</head>
+<body>
+    <header> اول مرة تكلمنا مع بعضنا</header>
+    <main>
+        <div class="Box" id="Box1" onclick="Guess('01')">
+            افريل 26 
+            <div id="False1" class="False">X</div>
+            <div id="Correct1" class="Correct">✔️</div>
+        </div>
+        <div class="Box" id="Box2" onclick="Guess('02')">
+            4 مارس
+            <div id="False2" class="False">X</div>
+            <div id="Correct2" class="Correct">✔️</div>
+        </div>
+        <div class="Box" id="Box3" onclick="Guess('03')">
+            11 افريل
+            <div id="False3" class="False">X</div>
+            <div id="Correct3" class="Correct">✔️</div>
+        </div>
+        <div id="Next" onclick="NextQ()">Next</div>
+    </main>
+</body>
+</html>

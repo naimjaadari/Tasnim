@@ -1,0 +1,169 @@
+*{
+    user-select: none;
+    margin: 0;padding: 0;
+}
+
+@font-face {
+    font-family: 'ArabicFont';
+    src: url('../alfont_com_LANTX-Bold.otf') format('truetype'); /* Adjust the format if needed */
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('../Poppins-Black.ttf') format('truetype'); /* Adjust the format if needed */
+}
+
+@font-face {
+    font-family: 'Acme';
+    src: url('../Acme-Regular.ttf') format('truetype'); /* Adjust the format if needed */
+}
+
+@font-face {
+    font-family: 'PopCat';
+    src: url('../Popcat.otf') format('truetype'); /* Adjust the format if needed */
+}
+@font-face {
+    font-family: 'Star';
+    src: url('../Starborn.otf') format('truetype'); /* Adjust the format if needed */
+}
+
+header{
+    background: linear-gradient(deeppink, pink, deeppink);
+    width: 100%;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "ArabicFont";
+    font-size: 10vmin;
+    text-shadow: 0 0 5vmin white;
+    border-bottom: .5vmin solid white;
+    box-sizing: border-box;
+    color: rgb(117, 7, 66);
+}
+main{
+    background: radial-gradient(rgba(235, 0, 39, 0),deeppink);
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 4vmin;
+    overflow: hidden;
+    
+}
+
+.Box{
+    width: 40vmin;
+    height: 40vmin;
+    background: rgba(255, 255, 255, 0.395);
+    cursor: pointer;
+    transition: .25s;
+    border-radius: 5px;
+    border: .5vmin solid deeppink;
+    display: flex;
+    justify-content: center;align-items: center;
+    color: white;
+    font-family: "ArabicFont";
+    font-size: 2rem;
+    position: relative;
+    text-align: center;
+}
+.Box111{display: none;}
+.Box:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 5vmin deeppink;
+    border-radius: 10px;
+    border: .5vmin solid white;
+}
+
+
+.False{
+    background: red;
+    width: 12vmin;
+    height: 12vmin;
+    position: absolute;
+    display: flex;justify-content: center;align-items: center;
+    border-radius: 10vmin;
+    border: 1vmin solid rgb(124, 0, 0);
+    box-sizing: border-box;
+    font-family: "Poppins";
+    right: -5vmin;
+    top: -5vmin;
+    display: none;
+}
+.Correct{
+    background: lime;
+    width: 12vmin;
+    height: 12vmin;
+    position: absolute;
+    display: flex;justify-content: center;align-items: center;
+    border-radius: 10vmin;
+    border: 1vmin solid rgb(0, 92, 0);
+    box-sizing: border-box;
+    font-family: "Poppins";
+    right: -5vmin;
+    top: -5vmin;
+    display: none;
+}
+
+
+#Next{
+    width: 15vmin;
+    height: 15vmin;
+    border-radius: 5vmin;
+    background: white;
+    display: flex;justify-content: center;align-items: center;
+    border: .5vmin solid deeppink;
+    font-family: "Poppins";
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    color: deeppink;
+    transition: .25s;
+    top: 7vmin;
+    display: none;
+    right: 5vmin;
+    font-size: 4vmin;
+
+}
+#Next:hover{
+    border-radius: 15vmin;
+    box-shadow: 0 0 5vmin white;
+    background: deeppink;
+    color: white;
+    border-radius: 100vmin;
+    transform: scale(1.3);
+}
+
+
+#MainQ, .Mainqq{font-family: "Popcat";}
+
+
+section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+section h1{
+    font-size: 3rem;
+    color: deeppink;
+    font-family: "Popcat";
+    transition: .5s;
+    text-shadow: 0 .3vmin white,
+                 0 -.3vmin white,
+                 .3vmin 0 white,
+                 -.3vmin 0 white;
+}
+section h1:hover{
+    letter-spacing: 1vmin;
+}
+section h4{
+    font-size: 1.5rem;
+    font-family: "Acme";
+    color: white;
+}
