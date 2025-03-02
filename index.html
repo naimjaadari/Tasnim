@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="backup/Menu_Button.png" type="image/png">
+    <title>Tasnim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <img onclick="Appear_Header()" src="backup/Menu_Button.png" id="Menu_Button">
+    <img onclick="Appear_MusicPlayer()" src="backup/sound.png" id="Music_Button">
+    <header id="Main_Header">
+        <div id="TitleBg"><h1><a id="Title" onclick="Appear_Header()">Tasnim</a></h1></div>
+        <nav>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Home">Home</a></div>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Memories">Memories</a></div>
+            <div class="ButtonsTop"><a id="dat" onclick="Appear_Header()" class="Buttons" href="#">Dates</a><img class="lock" src="backup/lock.png"></div>
+            <div class="ButtonsTop"><a id="fut" onclick="Appear_Header()" class="Buttons" href="#">Future</a><img class="lock" src="backup/lock.png"></div>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Game1">Game</a></div>
+        </nav>
+    </header>
+    <div id="Home">
+        <div id="Homebg"></div>
+        <h1 id="Timer">00:00:00:00</h1>
+        <p id="Paragraphe">Days since I found you ♡⸜(˶˃ ᵕ ˂˶)⸝♡</p>
+    </div>
+
+    <div id="Memories">
+        <h1 class="Body_Title">Memories</h1>
+        <div id="Memoriesbg"></div>
+        <div id="Photos_Container">
+            <div id="Photo1"><img onclick="OpenPhoto('Photo1')" src="Memories/Jerry.jpg"></div>
+            <div id="Photo2"><img onclick="OpenPhoto('Photo2')" src="Memories/Tas.png"></div>
+            <div id="Photo3"><img onclick="OpenPhoto('Photo3')" src="Memories/Me.png"></div>
+            <div id="Photo4">
+                <video controls onclick="OpenPhoto('Photo4')">
+                    <source src="Memories/LoveYou!.mp4" type="video/mp4">
+                </video>
+            </div>
+
+              
+        </div>
+
+    </div>
+    <div id="Dates">
+        <h1 class="Body_Title">Dates</h1>
+        <div id="DatesBg"></div>
+        <button id="prevBtn">❮</button>
+        <div id="Dates_Container">
+            <div class="Date_Holder active">
+                <p class="Date_Number">1</p>
+                <p class="Real_Date">11 April 2024</p>
+                <p class="Date_info">🙃 اول مرة نحكو فالجروب</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">2</p>
+                <p class="Real_Date">12 April 2024</p>
+                <p class="Date_info"> عملنا فولو لبعضنا (عملتلك فولو🙂)</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">3</p>
+                <p class="Real_Date">24 April 2024</p>
+                <p class="Date_info">💗 اول مرة قتلك نحبك</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">4</p>
+                <p class="Real_Date">3 July 2024</p>
+                <p class="Date_info">اول مرة نتقابلو <br> (  ≧ᗜ≦)</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">5</p>
+                <p class="Real_Date">3 August 2024</p>
+                <p class="Date_info">ثاني مرة قتلك فيها نحبك <br>⸜(｡˃ ᵕ ˂ )⸝♡</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">6</p>
+                <p class="Real_Date">20 September 2024</p>
+                <p class="Date_info">اول مرة نعملو ماتشينق <br>اول مرة نقولك توحشتك<br>اول مرة نقولك حبي (قتلك راني نفدلك اما مانفدلكش 🙂)<br>( ๑ ˃̵ᴗ˂̵)و ♡</p>
+            </div>
+            <div class="Date_Holder">
+                <p class="Date_Number">7</p>
+                <p class="Real_Date">10 October 2024</p>
+                <p class="Date_info">ثالث مرة قتلك فيها نحبك <br>⸜(｡˃ ᵕ ˂ )⸝♡</p>
+            </div>
+        </div>
+        <button id="nextBtn">❯</button>
+    </div>
+    
+    
+    <div id="Future">
+        <h1 class="Body_Title">Future</h1>
+        <div id="FutureBg"></div>
+        <p id="Input" onclick="ChangeFuture()">Click Me</p>
+    </div>
+    <div id="Game1">
+        <div id="Game1_Bg"></div>
+        <div id="Level_Container">
+            <div class="Level_Game1" id="Level_Title0">1</div>
+            <div class="Level_Game1" id="Level_Title1">2</div>
+            <div class="Level_Game1" id="Level_Title2">3</div>
+            <div class="Level_Game1" id="Level_Title3">4</div>
+            <div class="Level_Game1" id="Level_Title4">5</div>
+            <div class="Level_Game1" id="Level_Title5">6</div>
+            <div class="Level_Game1" id="Level_Title6">7</div>
+            <div class="Level_Game1" id="Level_Title7">8</div>
+            <div class="Level_Game1" id="Level_Title8">9</div>
+            <div class="Level_Game1" id="Level_Title9">10</div>
+        </div>
+        <div id="Game1_Bar">
+            <div id="Real_Bar"></div>
+        </div>
+        <iframe id="Game_Frame" src="backup/Pages/Level1.html"></iframe>
+        
+
+    </div>
+
+    <div id="music_player">
+        <div class="heart-decoration heart-1">❤</div>
+        <div class="heart-decoration heart-2">❤</div>
+        
+        <h3 class="player-title">Potato</h3>
+        <div class="now-playing" id="now-playing"></div>
+        <ul class="music-list" id="music-list">
+        </ul>
+        
+        <div class="controls">
+          <button class="control-btn prev-btn" id="prev-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+            </svg>
+          </button>
+          
+          <button class="control-btn play-btn" id="play-btn">
+            <svg viewBox="0 0 24 24" id="play-icon">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </button>
+          
+          <button class="control-btn next-btn" id="next-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+            </svg>
+          </button>
+        </div>
+    
+    </div>
+</body>
+</html>
+<script src="script.js"></script>
+<script src="backup/Pages/GameScript.js"></script>

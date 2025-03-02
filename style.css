@@ -1,0 +1,818 @@
+@font-face {
+    font-family: 'ArabicFont';
+    src: url('backup/alfont_com_LANTX-Bold.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('backup/Poppins-Black.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Acme';
+    src: url('backup/Acme-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'PopCat';
+    src: url('backup/Popcat.otf') format('truetype');
+}
+@font-face {
+    font-family: 'Star';
+    src: url('backup/Starborn.otf') format('truetype');
+}
+
+html, body{
+    height: 100%;
+    overflow: hidden;
+}
+
+*{padding: 0;margin: 0;scroll-behavior: smooth;}
+
+
+header:hover{opacity: 1;box-shadow: 0 5px 10vmin #ff27e650;}
+#TitleBg{
+    position: absolute;
+    width: 50vw;
+    margin-right: auto;
+    display: flex;justify-content: left;align-items: center;
+    height: 100%;
+                                 
+}
+#Title{
+    color: rgb(255, 0, 43);
+    font-family: "Star";
+    text-transform: uppercase;   
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    margin-left: 5vw;opacity: .5;transition: .5s;
+    text-decoration: none;position: relative;
+}
+#Title:hover{opacity: 1;letter-spacing: .4vmin;}
+
+#Title::before{
+    content: "💗";
+    z-index: -1;
+    position: absolute;
+    left: 80%;
+    transition: .6s;
+    opacity: 0;
+}
+#Title::after{
+    content: "💗";
+    z-index: -1;
+    position: absolute;
+    right: 80%;
+    transition: .6s;
+    opacity: 0;
+}
+#Title:hover::before{
+    opacity: 1;
+    transform: rotateZ(40deg);
+    left: 90%;
+}
+#Title:hover::after{
+    opacity: 1;
+    transform: rotateZ(-40deg);
+    right: 90%;
+}
+nav{
+    position: relative;
+    width: 50vw;
+    height: 100%;
+    background: transparent;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+.ButtonsTop{
+    margin-right: 2.5vmin;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+.Buttons{
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    font-family: "Popcat";
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    position:relative;
+    z-index: 0;
+    display: flex;
+    justify-content: center;align-items: center;
+    transition: .2s;
+   
+}
+#Menu_Button{
+    position: fixed;
+    z-index: 5;
+    background: transparent;
+    width: 5vmin;height: auto;
+    top: 3vh;
+    left: 3vw;
+    transition: .5s;
+    cursor: pointer;
+    filter: drop-shadow(0 0 .5vmin gray);
+}
+
+#Menu_Button:hover{
+    transform: rotateZ(315deg) scale(1.5);
+    filter: drop-shadow(0 0 .5vmin deeppink);
+}
+
+#Music_Button{
+    position: fixed;
+    z-index: 5;
+    background: transparent;
+    width: 5vmin;height: auto;
+    top: 3vh;
+    left: calc(5vw + 6vmin);
+    transition: .5s;
+    cursor: pointer;
+    filter: drop-shadow(0 0 .5vmin gray);
+}
+
+#Music_Button:hover{
+    transform: scale(1.5);
+    filter: drop-shadow(0 0 .5vmin deeppink);
+}
+
+.Buttons::after{
+    content: "";
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    left: 0;
+    top: 0;
+    transition: .2s;
+}
+.Buttons::before{
+    content: "";
+    background: linear-gradient(
+        45deg,
+        pink,
+        rgb(255, 0, 221), 
+        rgb(214, 53, 80),
+        rgb(241, 131, 247)
+    );
+    position: absolute;
+    z-index: -1;
+    background-size: 200%;
+    width: 100%;
+    height: 0%;
+    transition: .2s;
+}
+.Buttons:hover::after{
+    background: transparent;
+    width: 100%;height: 100%;
+}
+.Buttons:hover::before{
+    filter: blur(8px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+}
+.Buttons:hover{
+    color: white;
+}
+
+
+header {
+    position: fixed;
+    width: 90vw;
+    height: 10vh;
+    left: 10vh;
+    background: #fff;
+    z-index: 3;
+    border-bottom: 1px solid #ff27e62b;
+    box-shadow: 0 1vmin 10vmin #ff27e62b ;
+    transition: .3s;
+    border-radius: 50px;
+    opacity: .6;
+    top: -10vh;
+}
+#Home{
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 110vh;
+    font-size: 2rem;
+    font-family: "Poppins";
+    font-weight: 700;
+    color: black;
+    border-bottom: 1px solid gray;
+    transition: .2s;
+    display: flex;justify-content: center;align-items: center;
+    flex-direction: column;
+}
+
+#Memories{
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    display: flex;justify-content: center;align-items: center;
+    font-size: 2rem;
+    font-family: "Poppins";
+    font-weight: 700;
+    color: black;
+    border-bottom: 1px solid gray;
+    transition: .2s;
+}
+
+
+#Photo1, #Photo2, #Photo3, #Photo4 {
+    transition: order 0.5s ease;
+}
+#Photo4{
+    width: 20%;
+    height: 100%;
+}
+video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+video:fullscreen {
+    object-fit: contain;
+}
+#Dates{
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    font-size: 2rem;
+    font-family: "Poppins";
+    font-weight: 700;
+    color: black;
+    border-bottom: 1px solid gray;
+    transition: .2s;
+    display: flex;
+    align-items: center;justify-content: center;
+}
+#Future{
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: white;
+    display: flex;justify-content: center;align-items: center;
+    font-size: 2rem;
+    font-family: "Poppins";
+    font-weight: 700;
+    color: black;
+    transition: .2s;
+}
+
+
+
+#Homebg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;    
+    background: url("backup/HomeBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+}
+#Memoriesbg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;    
+    background: url("backup/Memoriesbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#Timer{
+    font-family: "Poppins";
+    color: deeppink;
+    text-shadow: 0 .8vmin rgb(131, 12, 75);
+    cursor: pointer;
+    z-index: 1;
+}
+
+#Paragraphe{
+    z-index: 1;
+    color: rgb(131, 12, 75);
+    font-family: "Popcat";
+    letter-spacing: 1vmin;
+    text-shadow: 0 .3vmin .5vmin deeppink;cursor: default;
+    
+}
+
+
+#Photos_Container {
+    z-index: 3;
+    width: 80vmin;
+    height: 60vmin;
+    border: 0.6vmin solid white;
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow: hidden;
+    opacity: .7;transition: .5s;
+}
+#Photos_Container:hover{
+    opacity: 1;transform: scale(1.1);
+}
+#Photo1 {
+    width: 60%;
+    filter: grayscale(0);
+}
+
+#Photo2 {
+    width: 20%;
+    filter: grayscale(1);
+}
+
+#Photo3 {
+    width: 20%;
+    filter: grayscale(1);
+}
+#Photo1, #Photo2, #Photo3{
+    transition: .25s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#Photos_Container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: grayscale(0);
+    cursor: pointer;
+}
+
+
+
+
+
+#DatesBg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;    
+    background: url("backup/DateBg.png");
+    background-repeat: no-repeat;
+    background-size: cover; 
+    filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.Date_Number{
+    background: deeppink;
+    display: flex;justify-content: center;align-items: center;
+    width: 9vmin;
+    height: 9vmin;
+    border-radius: 50px;
+    border: 0.5vmin solid white;
+    box-shadow: 0 0 1vmin deeppink;
+    color: white;transition: .25s;
+    font-family: "Acme";cursor: default;
+    margin-bottom: 3vmin;
+}
+.Date_Number:hover{transform: scale(1.2);box-shadow: 0 0 3vmin deeppink;
+background-color: rgb(211, 18, 121);}
+
+#Dates_Container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+}
+
+
+.Date_Holder {
+    background: rgba(128, 128, 128, 0.155);
+    width: 60vmin;
+    height: 40vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2vmin;
+    border: 3px solid white;
+    color: black;
+    box-shadow: 0 1vmin 1vmin gray;
+    cursor: pointer;
+    position: absolute;
+    height: fit-content;
+    transition: .5s;
+}
+.Date_Holder:hover{
+    border-radius: 5vmin;
+    color: white;
+    width: 70vmin;
+}
+
+.Date_Holder:not(.active) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.Date_Holder.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.Date_info{
+    font-family: "ArabicFont";text-align: center;
+}
+.Real_Date{margin-bottom: 4vmin;}
+
+#prevBtn, #nextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 105, 180, 0.7);
+    color: white;
+    border: none;
+
+    cursor: pointer;
+    z-index: 1;
+
+    box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.3); 
+    transition: .25s;
+    display: flex;
+    justify-content: center;align-items: center;
+    width: 10vmin;
+    height: 10vmin;
+    border-radius: 50px;
+    font-family: "Poppins";
+    font-size: 2rem;
+    border: .6vmin solid white;
+}
+
+#prevBtn:hover, #nextBtn:hover {
+    background-color: rgba(255, 20, 147, 0.9);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 0.8vmin 1.5vmin rgba(255, 100, 252, 0.5);
+    
+}
+
+#prevBtn {
+    left: 15vw;
+}
+
+#nextBtn {
+    right: 15vw;
+}
+
+
+
+
+#Input {
+    background: rgba(245, 222, 179, 0.438);
+    color: whitesmoke;
+    width: fit-content;
+    text-shadow: 0 0 5px black;
+    max-width: fit-content;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    font-family: "ArabicFont";
+    text-align: center;
+    border: 2px solid white;
+    z-index: 3;
+    cursor: pointer;
+    transition: .25s;
+    padding: 3vmin 5vmin;
+}
+#Input:hover{
+    transform: scale(1.2);
+    box-shadow: 0 0 10px black;
+    border-radius: 3vmin;
+}
+
+
+
+.Body_Title{
+    z-index: 2;
+    font-size: 3rem;
+    position: absolute;
+    top: 5vh;
+    color: white;
+    font-family: "Popcat";
+    cursor: default;
+    text-shadow: 0 .3vmin .5vmin deeppink;transition: .25s;
+}
+.Body_Title:hover{
+    letter-spacing: 2vmin;
+    transform: scale(1.1);
+    text-shadow: 0 .5vmin 3vmin deeppink;
+}
+
+#FutureBg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;    
+    background: url("backup/FutureBg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#Game1{
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: white; 
+    border-bottom: 1px solid gray;
+}
+#Game1_Bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 0;    
+    background: url("backup/Game_Bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#Game1_Bar {
+    position: absolute;
+    width: 90vw;
+    height: 4vmin;
+    background: transparent;
+    z-index: 3;
+    left: 50%;
+    translate: -50% 0;
+    top: 10vmin;
+    border: .5vmin solid white;
+    box-sizing: border-box;
+    border-radius: 10vmin;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+*{user-select: none;}
+#Level_Container {
+    position: absolute;
+    width: 92vw;
+    height: 4vmin;
+    z-index: 3;
+    left: 50%;
+    translate: -50% 0;
+    top: 10vmin;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 5;
+    background: transparent;
+}
+
+.Level_Game1{
+    color: white;
+    background: radial-gradient(pink, deeppink);
+    width: 6vmin;
+    height: 6vmin;
+    display: flex;
+    justify-content: center;align-items: center;
+    border-radius: 5vmin;
+    border: .5vmin solid white;
+    font-size: 1.5rem;
+    text-shadow: 0 0 20px deeppink;
+    font-family: "Poppins";
+    font-weight: 700;
+    transition: .25s;
+    cursor: pointer;
+}
+.Level_Game1:hover{
+    transform: scale(1.2);
+
+}
+
+#Real_Bar{
+    background: linear-gradient(180deg, deeppink, pink, deeppink);
+    width: 0vw;
+    height: 100%;
+    transition: 1.5s;
+}
+
+#Game_Frame{
+    width: 90vw;
+    height: 70vh;
+
+    z-index: 50;
+    position: absolute;
+    left: 50%;
+    bottom: 7.5vmin;
+    transform: translate(-50%,0);
+    border: none;outline: none;
+    border-radius: 2vmin;
+    border: .5vmin solid white;
+    box-sizing: border-box;
+    transition: .5s;
+}
+
+.lock{
+    width: 6vmin;
+    height: 6vmin;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;left: 50%;
+    pointer-events: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+#music_player {
+    width: 300px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px solid #ffd1dc;
+    position: absolute;
+    transform: translate(-50%,-50%) scale(0);
+    left: 50%;top: 50%;
+    z-index: 99;
+    overflow: hidden;
+    transition: .5s;
+  }
+  
+  #music_player::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 182, 193, 0.2), rgba(255, 105, 180, 0.2));
+    z-index: -1;
+  }
+  
+  .player-title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #ff69b4;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .music-list {
+    list-style-type: none;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    border-top: 1px solid #ffe6eb;
+    border-bottom: 1px solid #ffe6eb;
+    padding: 5px 0;
+  }
+  
+  .music-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .music-list::-webkit-scrollbar-thumb {
+    background: #ffb6c1;
+    border-radius: 10px;
+  }
+  
+  .music-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 3px 0;
+    transition: all 0.2s ease;
+    color: #666;
+    display: flex;
+    align-items: center;
+  }
+  
+  .music-item:hover {
+    background: #fff0f5;
+  }
+  
+  .music-item.playing {
+    background: #ffd1dc;
+    color: #ff1493;
+    font-weight: bold;
+  }
+  
+  .music-item-icon {
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(255, 105, 180, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #ff69b4;
+  }
+  
+  .control-btn:hover {
+    transform: scale(1.1);
+    background: #fff0f5;
+  }
+  
+  .control-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+  
+  .play-btn {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #ff69b4, #ffd1dc);
+    color: white;
+  }
+  
+  .now-playing {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #ff69b4;
+    font-style: italic;
+    min-height: 20px;
+  }
+  
+  .heart-decoration {
+    position: absolute;
+    font-size: 20px;
+    color: #ff69b4;
+    opacity: 0.2;
+  }
+  
+  .heart-1 {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .heart-2 {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .love-message {
+    text-align: center;
+    font-size: 12px;
+    color: #ff69b4;
+    margin-top: 10px;
+    font-style: italic;
+  }
