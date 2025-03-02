@@ -347,3 +347,11 @@ function OpenPhoto(PhotoId){
         }
     }
 }
+
+
+
+var password = "Tasnim Love Potato";
+var userInput = prompt("Password: ");
+if (userInput !== password) {
+  window.location.href = "https://www.youtube.com/watch?v=J---aiyznGQ";
+}
