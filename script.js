@@ -230,7 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
       { title: "The Night We Met", file: "backup/file_music/The_Night_We_Met.mp3" },
       { title: "Years And Years - Breathe", file: "backup/file_music/Breathe.mp3" },
       { title: "Yung kai - blue", file: "backup/file_music/blue.mp3" },
-      { title: "Die With A Smile", file: "backup/file_music/die_with_a_smile.mp3" }
+      { title: "Die With A Smile", file: "backup/file_music/die_with_a_smile.mp3" },
+      { title: "Let It Go - Frozen", file: "backup/file_music/let.mp3" },
+      { title: "Into the Unknown - Frozen", file: "backup/file_music/into.mp3" },
+      { title: "Show Yourself - Frozen 2", file: "backup/file_music/show.mp3" },
+      { title: "For the First Time in Forever - Frozen 2", file: "backup/file_music/for.mp3" }
     ];
     const musicListElement = document.getElementById('music-list');
     const playBtn = document.getElementById('play-btn');
