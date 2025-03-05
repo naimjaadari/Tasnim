@@ -82,11 +82,21 @@
 <body>
     <div id="loading-screen">
         <div class="spinner-heart"></div>
-        <div class="loading-text">لحضة برك...</div>
+        <div class="loading-text">Loading...</div>
     </div>
 
     <img onclick="Appear_Header()" src="backup/Menu_Button.png" id="Menu_Button">
     <img onclick="Appear_MusicPlayer()" src="backup/sound.png" id="Music_Button">
+    <header id="Main_Header">
+        <div id="TitleBg"><h1><a id="Title" onclick="Appear_Header()">Tasnim</a></h1></div>
+        <nav>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Home">Home</a></div>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Memories">Memories</a></div>
+            <div class="ButtonsTop"><a id="dat" onclick="Appear_Header()" class="Buttons" href="#">Dates</a><img class="lock" src="backup/lock.png"></div>
+            <div class="ButtonsTop"><a id="fut" onclick="Appear_Header()" class="Buttons" href="#">Future</a><img class="lock" src="backup/lock.png"></div>
+            <div class="ButtonsTop"><a onclick="Appear_Header()" class="Buttons" href="#Game1">Game</a></div>
+        </nav>
+    </header>
     <div id="Home">
         <div id="Homebg"></div>
         <h1 id="Timer">00:00:00:00</h1>
@@ -105,10 +115,7 @@
                     <source src="Memories/LoveYou.mp4" type="video/mp4">
                 </video>
             </div>
-
-              
         </div>
-
     </div>
     <div id="Dates">
         <h1 class="Body_Title">Dates</h1>
@@ -178,8 +185,6 @@
             <div id="Real_Bar"></div>
         </div>
         <iframe id="Game_Frame" src="backup/Pages/Level1.html"></iframe>
-        
-
     </div>
 
     <div id="music_player">
@@ -210,78 +215,38 @@
             </svg>
           </button>
         </div>
-    
     </div>
 </body>
 <script src="script.js"></script>
 <script src="backup/Pages/GameScript.js"></script>
 <script>
-    // Function to preload all images
-    function preloadImages() {
-        const images = document.querySelectorAll('img, video source');
-        const totalImages = images.length;
-        let loadedImages = 0;
-
-        return new Promise((resolve) => {
-            images.forEach(img => {
-                const tempImg = new Image();
-                tempImg.onload = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                tempImg.onerror = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                tempImg.src = img.src;
-            });
-
-            // Add video source handling
-            const videoSources = document.querySelectorAll('video source');
-            videoSources.forEach(source => {
-                const video = document.createElement('video');
-                video.onloadedmetadata = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                video.onerror = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                video.src = source.src;
-            });
-
-            // If no images, resolve immediately
-            if (totalImages === 0) {
-                resolve();
-            }
-
-            // Fallback to resolve after a maximum time
-            setTimeout(resolve, 10000);
-        });
-    }
-
-    // Function to update loading text
-    function updateLoadingText(loaded, total) {
-        const loadingText = document.querySelector('.loading-text');
-        if (loadingText) {
-            loadingText.textContent = `Loading... ${loaded}/${total}`;
-        }
-    }
-
-    // Wait for all resources to load
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('load', function() {
         const loadingScreen = document.getElementById('loading-screen');
-
-        preloadImages().then(() => {
-            // Fade out loading screen
+        
+        // Wait a moment to ensure all resources are fully processed
+        setTimeout(() => {
             loadingScreen.classList.add('hidden');
             
             // Completely remove the loading screen after transition
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
             }, 500);
-        });
+        }, 500);
+    });
+
+    // Add an event listener to catch any potential loading errors
+    document.addEventListener('DOMContentLoaded', function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        
+        // Hide loading screen if it's still showing after a maximum time
+        setTimeout(() => {
+            if (!loadingScreen.classList.contains('hidden')) {
+                loadingScreen.classList.add('hidden');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        }, 5000); // Maximum 5 seconds of loading screen
     });
 </script>
 </html>
