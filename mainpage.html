@@ -243,11 +243,9 @@
                 const video = document.createElement('video');
                 video.onloadedmetadata = () => {
                     loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
                 };
                 video.onerror = () => {
                     loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
                 };
                 video.src = source.src;
             });
@@ -256,13 +254,6 @@
             }
             setTimeout(resolve, 10000);
         });
-    }
-
-    function updateLoadingText(loaded, total) {
-        const loadingText = document.querySelector('.loading-text');
-        if (loadingText) {
-            loadingText.textContent = `Loading... ${loaded}/${total}`;
-        }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
