@@ -220,33 +220,60 @@
 <script src="script.js"></script>
 <script src="backup/Pages/GameScript.js"></script>
 <script>
-    window.addEventListener('load', function() {
+    function preloadImages() {
+        const images = document.querySelectorAll('img, video source');
+        const totalImages = images.length;
+        let loadedImages = 0;
+
+        return new Promise((resolve) => {
+            images.forEach(img => {
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    loadedImages++;
+                    updateLoadingText(loadedImages, totalImages);
+                };
+                tempImg.onerror = () => {
+                    loadedImages++;
+                    updateLoadingText(loadedImages, totalImages);
+                };
+                tempImg.src = img.src;
+            });
+            const videoSources = document.querySelectorAll('video source');
+            videoSources.forEach(source => {
+                const video = document.createElement('video');
+                video.onloadedmetadata = () => {
+                    loadedImages++;
+                    updateLoadingText(loadedImages, totalImages);
+                };
+                video.onerror = () => {
+                    loadedImages++;
+                    updateLoadingText(loadedImages, totalImages);
+                };
+                video.src = source.src;
+            });
+            if (totalImages === 0) {
+                resolve();
+            }
+            setTimeout(resolve, 10000);
+        });
+    }
+
+    function updateLoadingText(loaded, total) {
+        const loadingText = document.querySelector('.loading-text');
+        if (loadingText) {
+            loadingText.textContent = `Loading... ${loaded}/${total}`;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
         const loadingScreen = document.getElementById('loading-screen');
-        
-        // Wait a moment to ensure all resources are fully processed
-        setTimeout(() => {
+
+        preloadImages().then(() => {
             loadingScreen.classList.add('hidden');
-            
-            // Completely remove the loading screen after transition
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
             }, 500);
-        }, 500);
-    });
-
-    // Add an event listener to catch any potential loading errors
-    document.addEventListener('DOMContentLoaded', function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        
-        // Hide loading screen if it's still showing after a maximum time
-        setTimeout(() => {
-            if (!loadingScreen.classList.contains('hidden')) {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
-            }
-        }, 5000); // Maximum 5 seconds of loading screen
+        });
     });
 </script>
 </html>
