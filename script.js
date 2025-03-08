@@ -383,7 +383,7 @@ function OpenPhoto(PhotoId) {
 }
 function LoadTimes() {
   let messageContent = document.getElementById("message_content");
-  messageContent.scrollTop = messageContent.scrollHeight;
+  messageContent.scrollTop = ((messageContent.scrollHeight) * 999999999);
   let messages = document.getElementsByClassName("message_time");
   for (let i = 0; i < messages.length; i++) {
     let Message_Date = messages[i].id;
