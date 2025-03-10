@@ -414,9 +414,6 @@ function LoadTimes() {
   }
 }
 
-
-
-
 //Float Text Based On The Langue Used For The Text
 document.querySelectorAll(".message").forEach((message) => {
   function updateTextAlignment() {
@@ -431,3 +428,229 @@ document.querySelectorAll(".message").forEach((message) => {
   message.addEventListener("input", updateTextAlignment); // If content changes dynamically
 });
 
+function ClickedMessage(e) {
+  // Get the event properly
+  const event = e || window.event;
+  const messageEl = event.currentTarget;
+
+  // Check if the click is on the heart (::after element)
+  const rect = messageEl.getBoundingClientRect();
+  const isHeartClick =
+    event.clientX > rect.right - 30 && event.clientY > rect.bottom - 30;
+
+  // If it's a heart click, we'll exit to avoid effects on the heart itself
+  if (isHeartClick) {
+    return;
+  }
+
+  // Calculate position relative to the message
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  // Ensure position is relative for absolute positioning of children
+  messageEl.style.position = "relative";
+  //messageEl.style.overflow = "hidden";
+
+  // More vibrant and cute colors
+  const colors = [
+    "#FF9CC4",
+    "#FFB6C1",
+    "#FFC0CB",
+    "#FF85A2",
+    "#FF619B",
+    "#FFA6D5",
+    "#FF73B9",
+  ];
+  const emojis = ["♥", "🌸", "✿"];
+  const particleCount = 12; // More particles
+
+  // Optional sound effect - removed the data URL approach which was causing the error
+  // We'll just skip the sound since we don't have a proper audio file
+
+  // Create a main bubble with sparkle effect
+  const bubble = document.createElement("div");
+  bubble.style.position = "absolute";
+  bubble.style.left = `${x}px`;
+  bubble.style.top = `${y}px`;
+  bubble.style.width = "60px";
+  bubble.style.height = "60px";
+  bubble.style.borderRadius = "50%";
+  bubble.style.background =
+    "radial-gradient(circle at 30% 30%, white, #FFC0CB)";
+  bubble.style.boxShadow = "0px 0px 15px rgba(255, 182, 193, 0.9)";
+  bubble.style.transform = "translate(-50%, -50%) scale(0)";
+  bubble.style.opacity = "0.95";
+  bubble.style.zIndex = "1000";
+  bubble.style.pointerEvents = "none";
+  bubble.style.transition = "all 0.4s cubic-bezier(0.1, 0.8, 0.3, 1)";
+
+  try {
+    messageEl.appendChild(bubble);
+
+    // Animate the main bubble with a bounce effect
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(1.3)";
+    }, 10);
+
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(1.1)";
+    }, 150);
+
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(0.8)";
+      bubble.style.opacity = "0";
+    }, 300);
+
+    // Add a light flash effect
+    const flash = document.createElement("div");
+    flash.style.position = "absolute";
+    flash.style.left = `${x}px`;
+    flash.style.top = `${y}px`;
+    flash.style.width = "100px";
+    flash.style.height = "100px";
+    flash.style.borderRadius = "50%";
+    flash.style.background =
+      "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)";
+    flash.style.transform = "translate(-50%, -50%) scale(0)";
+    flash.style.opacity = "0.7";
+    flash.style.zIndex = "998";
+    flash.style.pointerEvents = "none";
+    flash.style.transition = "all 0.3s ease-out";
+    messageEl.appendChild(flash);
+
+    setTimeout(() => {
+      flash.style.transform = "translate(-50%, -50%) scale(1.5)";
+      flash.style.opacity = "0";
+    }, 10);
+
+    setTimeout(() => {
+      if (flash.parentNode === messageEl) {
+        messageEl.removeChild(flash);
+      }
+    }, 300);
+
+    // Create and animate heart particles and sparkles
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("div");
+      const size = Math.random() * 15 + 10; // Larger size range
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 60 + 40; // Greater distance
+      const duration = Math.random() * 800 + 600; // Longer duration
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const isEmoji = Math.random() > 0.5; // 50% chance for emoji vs heart
+
+      if (isEmoji) {
+        // Use cute emoji
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        particle.innerHTML = emoji;
+        particle.style.fontSize = `${size}px`;
+      } else {
+        // Create heart shape
+        particle.innerHTML = "♥";
+        particle.style.fontSize = `${size}px`;
+      }
+
+      particle.style.position = "absolute";
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+      particle.style.color = color;
+      particle.style.textShadow = "0px 0px 5px rgba(255,255,255,0.7)";
+      particle.style.transform = "translate(-50%, -50%) scale(0) rotate(0deg)";
+      particle.style.transformOrigin = "center center";
+      particle.style.opacity = "0.95";
+      particle.style.zIndex = "999";
+      particle.style.pointerEvents = "none";
+      particle.style.transition = `all ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1)`;
+
+      messageEl.appendChild(particle);
+
+      // Add a bobbing/floating motion to particles
+      const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+
+      // Animate each particle with slight wobble
+      setTimeout(() => {
+        const targetX = x + Math.cos(angle) * distance;
+        const targetY = y + Math.sin(angle) * distance - 20; // Slight upward bias
+        particle.style.left = `${targetX}px`;
+        particle.style.top = `${targetY}px`;
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.5 + 0.8
+        }) rotate(${rotation}deg)`;
+      }, 10);
+
+      // Add a slight wobble animation
+      setTimeout(() => {
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.3 + 0.7
+        }) rotate(${rotation + 10}deg)`;
+      }, duration / 3);
+
+      setTimeout(() => {
+        particle.style.opacity = "0";
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.2 + 0.5
+        }) rotate(${rotation + 20}deg)`;
+      }, (duration * 2) / 3);
+
+      // Remove particle
+      setTimeout(() => {
+        if (particle.parentNode === messageEl) {
+          messageEl.removeChild(particle);
+        }
+      }, duration);
+    }
+
+    // Add tiny sparkles that appear slightly delayed
+    setTimeout(() => {
+      for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement("div");
+        const sparkleSize = Math.random() * 5 + 3;
+        const sparkleAngle = Math.random() * Math.PI * 2;
+        const sparkleDistance = Math.random() * 30 + 20;
+        const sparkleDuration = Math.random() * 400 + 300;
+
+        sparkle.innerHTML = "✦"; // Unicode sparkle character
+        sparkle.style.position = "absolute";
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+        sparkle.style.fontSize = `${sparkleSize}px`;
+        sparkle.style.color = "white";
+        sparkle.style.textShadow = "0px 0px 3px rgba(255, 215, 0, 0.8)";
+        sparkle.style.transform = "translate(-50%, -50%) scale(0)";
+        sparkle.style.opacity = "0.9";
+        sparkle.style.zIndex = "997";
+        sparkle.style.pointerEvents = "none";
+        sparkle.style.transition = `all ${sparkleDuration}ms ease-out`;
+
+        messageEl.appendChild(sparkle);
+
+        setTimeout(() => {
+          const targetX = x + Math.cos(sparkleAngle) * sparkleDistance;
+          const targetY = y + Math.sin(sparkleAngle) * sparkleDistance;
+          sparkle.style.left = `${targetX}px`;
+          sparkle.style.top = `${targetY}px`;
+          sparkle.style.transform = "translate(-50%, -50%) scale(1)";
+        }, 50);
+
+        setTimeout(() => {
+          sparkle.style.opacity = "0";
+        }, sparkleDuration / 2);
+
+        setTimeout(() => {
+          if (sparkle.parentNode === messageEl) {
+            messageEl.removeChild(sparkle);
+          }
+        }, sparkleDuration);
+      }
+    }, 100);
+
+    // Remove the main bubble
+    setTimeout(() => {
+      if (bubble.parentNode === messageEl) {
+        messageEl.removeChild(bubble);
+      }
+    }, 900);
+  } catch (error) {
+    console.error("Error in ClickedMessage:", error);
+  }
+}
