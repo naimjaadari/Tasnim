@@ -883,6 +883,7 @@ video:fullscreen {
   overflow-y: auto;
   padding-right: 12px;
   padding-left: 20px;
+  overflow-x: hidden;
 }
 
 #message_content::-webkit-scrollbar {
