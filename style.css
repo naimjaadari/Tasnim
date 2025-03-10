@@ -231,7 +231,7 @@ header {
   transition: 0.3s;
   border-radius: 50px;
   opacity: 0.6;
-  top: -10vh;
+  top: -15vh;
 }
 #Home {
   z-index: 1;
@@ -1031,4 +1031,17 @@ video:fullscreen {
 .message:hover::before,
 .message:hover::after {
   animation-play-state: running;
+}
+
+
+#black_screen{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 3;
+  background: black;
+  opacity: 0;
+  display: none;
+  transition: .5s;
+
 }
