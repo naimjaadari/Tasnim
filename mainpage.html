@@ -289,26 +289,29 @@
     <div id="message_container">
       <div class="title">Potato Chat</div>
       <div id="message_content">
-        <div class="message">
+        <div class="message" onclick="ClickedMessage(event)">
           Hetha Awel Message Bch ntesty bih el chat W'hahou ye5dem :) <br />
           El mohem tw na3melek Tal5is 3la Fekret el Potato Chat: <br />
           1- 7awli t5ali el date mt3 el pc s7i7 bch wa9et el message ykoun s7i7
           zeda <br />
-          2- Lel Asef ma tnajmich Tektbi fil chat :( <br> 
-          (5ater y7ibelha barcha wa9et ama tw n7awel na3malha fil mosta9bel) <br>
-          3- khaw kmel el mola5es ma l9it ma nfaser a5er (Love you (˶˃ ᵕ ˂˶))
+          2- Lel Asef ma tnajmich Tektbi fil chat :( <br />
+          (5ater y7ibelha barcha wa9et ama tw n7awel na3malha fil mosta9bel)
+          <br />
+          3- Tnajmi tetfa3li m3a el message bel click (kabes kabes) <br />
+          4- khaw kmel el mola5es ma l9it ma nfaser a5er (Love you (˶˃ ᵕ ˂˶))
           <div class="message_time" id="2025-03-07-14:20"></div>
         </div>
 
-        <div class="message">
-           وبعد 3 سوايع نجمت نخليه يقبل العربية رغم انو مش 100% اما عالاقل يقبلها، عندي برشة افكار نحب نزيدها زي انو نولي نبعث تصاور والا فيديوات والله تولي تحفة
+        <div class="message" onclick="ClickedMessage(event)">
+          وبعد 3 سوايع نجمت نخليه يقبل العربية رغم انو مش 100% اما عالاقل
+          يقبلها، عندي برشة افكار نحب نزيدها زي انو نولي نبعث تصاور والا فيديوات
+          والله تولي تحفة
           <div class="message_time" id="2025-03-07-18:02"></div>
         </div>
-        <div class="message">
+        <div class="message" onclick="ClickedMessage(event)">
           اللعنة نعدي دفوار فلسفة، توحشتك تبا
           <div class="message_time" id="2025-03-10-05:26"></div>
         </div>
-
       </div>
     </div>
   </body>
@@ -316,50 +319,48 @@
   <script src="backup/Pages/GameScript.js"></script>
   <script>
     function preloadImages() {
-        const images = document.querySelectorAll('img, video source');
-        const totalImages = images.length;
-        let loadedImages = 0;
+      const images = document.querySelectorAll("img, video source");
+      const totalImages = images.length;
+      let loadedImages = 0;
 
-        return new Promise((resolve) => {
-            images.forEach(img => {
-                const tempImg = new Image();
-                tempImg.onload = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                tempImg.onerror = () => {
-                    loadedImages++;
-                    updateLoadingText(loadedImages, totalImages);
-                };
-                tempImg.src = img.src;
-            });
-            const videoSources = document.querySelectorAll('video source');
-            videoSources.forEach(source => {
-                const video = document.createElement('video');
-                video.onloadedmetadata = () => {
-                    loadedImages++;
-                };
-                video.onerror = () => {
-                    loadedImages++;
-                };
-                video.src = source.src;
-            });
-            if (totalImages === 0) {
-                resolve();
-            }
-            setTimeout(resolve, 10000);
+      return new Promise((resolve) => {
+        images.forEach((img) => {
+          const tempImg = new Image();
+          tempImg.onload = () => {
+            loadedImages++;
+          };
+          tempImg.onerror = () => {
+            loadedImages++;
+          };
+          tempImg.src = img.src;
         });
+        const videoSources = document.querySelectorAll("video source");
+        videoSources.forEach((source) => {
+          const video = document.createElement("video");
+          video.onloadedmetadata = () => {
+            loadedImages++;
+          };
+          video.onerror = () => {
+            loadedImages++;
+          };
+          video.src = source.src;
+        });
+        if (totalImages === 0) {
+          resolve();
+        }
+        setTimeout(resolve, 10000);
+      });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const loadingScreen = document.getElementById('loading-screen');
+    document.addEventListener("DOMContentLoaded", () => {
+      const loadingScreen = document.getElementById("loading-screen");
 
-        preloadImages().then(() => {
-            loadingScreen.classList.add('hidden');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        });
+      preloadImages().then(() => {
+        loadingScreen.classList.add("hidden");
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+        }, 500);
+      });
     });
   </script>
 </html>
