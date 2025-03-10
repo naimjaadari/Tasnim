@@ -51,7 +51,7 @@ function Appear_Header() {
   var Button = document.getElementById("Menu_Button");
   var mubtn = document.getElementById("Music_Button");
   var chatbtn = document.getElementById("Chat_Button");
-
+  ClickSoundEffect();
   if (!HeaderisOpen) {
     header.style.top = "1vh";
     Button.style.display = "none";
@@ -60,7 +60,7 @@ function Appear_Header() {
     chatbtn.style.left = "2vw";
     chatbtn.style.top = "11vh";
   } else {
-    header.style.top = "-10vh";
+    header.style.top = "-15vh";
     Button.style.display = "block";
     HeaderisOpen = false;
     mubtn.style.left = "calc(5vw + 6vmin)";
@@ -93,6 +93,7 @@ function AppearElement(element) {
 }
 
 function Appear_Chat() {
+  ClickSoundEffect();
   var header = document.getElementById("message_container");
   if (buttonClicked) return;
   buttonClicked = true;
@@ -101,7 +102,10 @@ function Appear_Chat() {
     CloseElement(document.getElementById("music_player"));
     document.getElementById("Music_Button").style.transform =
       "rotate(0deg) scale(1)";
+  } else {
+    Appear_Black_Screen();
   }
+
   setTimeout(function () {
     buttonClicked = false;
   }, 500);
@@ -117,6 +121,7 @@ function Appear_Chat() {
 
 var musicIsOpen = false;
 function Appear_MusicPlayer() {
+  ClickSoundEffect();
   var header = document.getElementById("music_player");
   var button = document.getElementById("Music_Button");
   if (buttonClicked) return;
@@ -124,6 +129,8 @@ function Appear_MusicPlayer() {
   if (chatIsOpen) {
     chatIsOpen = false;
     CloseElement(document.getElementById("message_container"));
+  } else {
+    Appear_Black_Screen();
   }
 
   setTimeout(function () {
@@ -215,7 +222,6 @@ window.addEventListener("message", async function (event) {
   if (event.data.type === "changeBox1") {
     var Answer = event.data.text;
     var Bubble = document.getElementById("Level_Title" + event.data.Q);
-
     if (Answer) {
       Bubble.style.background = "radial-gradient(lime, green)";
     } else {
@@ -241,7 +247,7 @@ window.addEventListener("message", async function (event) {
     document.getElementsByClassName("lock")[1].style.display = "none";
   }
 });
-/*Music Player*/
+// Music Player
 document.addEventListener("DOMContentLoaded", () => {
   const musicList = [
     { title: "ROSE & Bruno Mars - APT", file: "backup/file_music/apt.mp3" },
@@ -278,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = document.createElement("li");
       li.className = "music-item";
       li.setAttribute("data-index", index);
-      li.innerHTML = `
+      li.innerHTML = ` 
           <span class="music-item-icon">♪</span>
           ${track.title}
         `;
@@ -293,7 +299,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentAudio) {
       currentAudio.pause();
       isPlaying = false;
-      updatePlayIcon();
       document.querySelectorAll(".music-item").forEach((item) => {
         item.classList.remove("playing");
       });
@@ -318,6 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePlayIcon();
   }
   function updatePlayIcon() {
+    ClickSoundEffect();
     if (isPlaying) {
       playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
     } else {
@@ -366,6 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
 var OpenedPhotoId = "Photo1";
 
 function OpenPhoto(PhotoId) {
+  ClickSoundEffect();
   if (PhotoId != OpenedPhotoId) {
     OpenedPhotoId = PhotoId;
     var Container = document.getElementById("Photos_Container");
@@ -395,7 +402,7 @@ function LoadTimes() {
     let FinalMessage = "";
 
     let timeDiff = Current_Date - msgDate;
-    let dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Difference in days
+    let dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
 
     if (dayDiff === 0) {
       FinalMessage = "Today";
@@ -418,40 +425,29 @@ function LoadTimes() {
 document.querySelectorAll(".message").forEach((message) => {
   function updateTextAlignment() {
     if (/[\u0600-\u06FF]/.test(message.textContent)) {
-      message.style.textAlign = "right"; // Arabic
+      message.style.textAlign = "right";
     } else {
-      message.style.textAlign = "left"; // English
+      message.style.textAlign = "left";
     }
   }
 
-  updateTextAlignment(); // Run once at the beginning
-  message.addEventListener("input", updateTextAlignment); // If content changes dynamically
+  updateTextAlignment();
+  message.addEventListener("input", updateTextAlignment);
 });
 
 function ClickedMessage(e) {
-  // Get the event properly
+  ClickSoundEffect();
   const event = e || window.event;
   const messageEl = event.currentTarget;
-
-  // Check if the click is on the heart (::after element)
   const rect = messageEl.getBoundingClientRect();
   const isHeartClick =
     event.clientX > rect.right - 30 && event.clientY > rect.bottom - 30;
-
-  // If it's a heart click, we'll exit to avoid effects on the heart itself
   if (isHeartClick) {
     return;
   }
-
-  // Calculate position relative to the message
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
-
-  // Ensure position is relative for absolute positioning of children
   messageEl.style.position = "relative";
-  //messageEl.style.overflow = "hidden";
-
-  // More vibrant and cute colors
   const colors = [
     "#FF9CC4",
     "#FFB6C1",
@@ -462,12 +458,7 @@ function ClickedMessage(e) {
     "#FF73B9",
   ];
   const emojis = ["♥", "🌸", "✿"];
-  const particleCount = 12; // More particles
-
-  // Optional sound effect - removed the data URL approach which was causing the error
-  // We'll just skip the sound since we don't have a proper audio file
-
-  // Create a main bubble with sparkle effect
+  const particleCount = 12;
   const bubble = document.createElement("div");
   bubble.style.position = "absolute";
   bubble.style.left = `${x}px`;
@@ -486,8 +477,6 @@ function ClickedMessage(e) {
 
   try {
     messageEl.appendChild(bubble);
-
-    // Animate the main bubble with a bounce effect
     setTimeout(() => {
       bubble.style.transform = "translate(-50%, -50%) scale(1.3)";
     }, 10);
@@ -500,8 +489,6 @@ function ClickedMessage(e) {
       bubble.style.transform = "translate(-50%, -50%) scale(0.8)";
       bubble.style.opacity = "0";
     }, 300);
-
-    // Add a light flash effect
     const flash = document.createElement("div");
     flash.style.position = "absolute";
     flash.style.left = `${x}px`;
@@ -528,24 +515,20 @@ function ClickedMessage(e) {
         messageEl.removeChild(flash);
       }
     }, 300);
-
-    // Create and animate heart particles and sparkles
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement("div");
-      const size = Math.random() * 15 + 10; // Larger size range
+      const size = Math.random() * 15 + 10;
       const angle = Math.random() * Math.PI * 2;
-      const distance = Math.random() * 60 + 40; // Greater distance
-      const duration = Math.random() * 800 + 600; // Longer duration
+      const distance = Math.random() * 60 + 40;
+      const duration = Math.random() * 800 + 600;
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const isEmoji = Math.random() > 0.5; // 50% chance for emoji vs heart
+      const isEmoji = Math.random() > 0.5;
 
       if (isEmoji) {
-        // Use cute emoji
         const emoji = emojis[Math.floor(Math.random() * emojis.length)];
         particle.innerHTML = emoji;
         particle.style.fontSize = `${size}px`;
       } else {
-        // Create heart shape
         particle.innerHTML = "♥";
         particle.style.fontSize = `${size}px`;
       }
@@ -563,14 +546,11 @@ function ClickedMessage(e) {
       particle.style.transition = `all ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1)`;
 
       messageEl.appendChild(particle);
+      const rotation = (Math.random() - 0.5) * 60;
 
-      // Add a bobbing/floating motion to particles
-      const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
-
-      // Animate each particle with slight wobble
       setTimeout(() => {
         const targetX = x + Math.cos(angle) * distance;
-        const targetY = y + Math.sin(angle) * distance - 20; // Slight upward bias
+        const targetY = y + Math.sin(angle) * distance - 20;
         particle.style.left = `${targetX}px`;
         particle.style.top = `${targetY}px`;
         particle.style.transform = `translate(-50%, -50%) scale(${
@@ -578,7 +558,6 @@ function ClickedMessage(e) {
         }) rotate(${rotation}deg)`;
       }, 10);
 
-      // Add a slight wobble animation
       setTimeout(() => {
         particle.style.transform = `translate(-50%, -50%) scale(${
           Math.random() * 0.3 + 0.7
@@ -592,7 +571,6 @@ function ClickedMessage(e) {
         }) rotate(${rotation + 20}deg)`;
       }, (duration * 2) / 3);
 
-      // Remove particle
       setTimeout(() => {
         if (particle.parentNode === messageEl) {
           messageEl.removeChild(particle);
@@ -600,7 +578,6 @@ function ClickedMessage(e) {
       }, duration);
     }
 
-    // Add tiny sparkles that appear slightly delayed
     setTimeout(() => {
       for (let i = 0; i < 8; i++) {
         const sparkle = document.createElement("div");
@@ -609,7 +586,7 @@ function ClickedMessage(e) {
         const sparkleDistance = Math.random() * 30 + 20;
         const sparkleDuration = Math.random() * 400 + 300;
 
-        sparkle.innerHTML = "✦"; // Unicode sparkle character
+        sparkle.innerHTML = "✦";
         sparkle.style.position = "absolute";
         sparkle.style.left = `${x}px`;
         sparkle.style.top = `${y}px`;
@@ -643,8 +620,6 @@ function ClickedMessage(e) {
         }, sparkleDuration);
       }
     }, 100);
-
-    // Remove the main bubble
     setTimeout(() => {
       if (bubble.parentNode === messageEl) {
         messageEl.removeChild(bubble);
@@ -652,5 +627,28 @@ function ClickedMessage(e) {
     }, 900);
   } catch (error) {
     console.error("Error in ClickedMessage:", error);
+  }
+}
+
+function ClickSoundEffect() {
+  let audio = new Audio("backup/clickeffect.wav");
+  audio.play();
+}
+let black_screen_IsOpen = false;
+
+function Appear_Black_Screen() {
+  let fade = document.getElementById("black_screen");
+  if (black_screen_IsOpen) {
+    black_screen_IsOpen = false;
+    fade.style.opacity = 0;
+    setTimeout(() => {
+      fade.style.display = "none";
+    }, 500);
+  } else {
+    black_screen_IsOpen = true;
+    fade.style.display = "block";
+    setTimeout(() => {
+      fade.style.opacity = 0.8;
+    }, 0);
   }
 }
