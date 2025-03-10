@@ -404,3 +404,21 @@ function LoadTimes() {
     messages[i].textContent = FinalMessage;
   }
 }
+
+
+
+
+//Float Text Based On The Langue Used For The Text
+document.querySelectorAll(".message").forEach((message) => {
+  function updateTextAlignment() {
+    if (/[\u0600-\u06FF]/.test(message.textContent)) {
+      message.style.textAlign = "right"; // Arabic
+    } else {
+      message.style.textAlign = "left"; // English
+    }
+  }
+
+  updateTextAlignment(); // Run once at the beginning
+  message.addEventListener("input", updateTextAlignment); // If content changes dynamically
+});
+
