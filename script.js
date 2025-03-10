@@ -383,10 +383,9 @@ function OpenPhoto(PhotoId) {
 }
 function LoadTimes() {
   let messageContent = document.getElementById("message_content");
-  setTimeout(() => {
+  requestAnimationFrame(() => {
     messageContent.scrollTop = messageContent.scrollHeight;
-  }, 1500);
-
+  });
   let messages = document.getElementsByClassName("message_time");
   let Current_Date = new Date();
 
