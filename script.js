@@ -385,21 +385,31 @@ function LoadTimes() {
   let messageContent = document.getElementById("message_content");
   setTimeout(() => {
     messageContent.scrollTop = messageContent.scrollHeight;
-  }, 2500);
+  }, 1500);
+
   let messages = document.getElementsByClassName("message_time");
+  let Current_Date = new Date();
+
   for (let i = 0; i < messages.length; i++) {
     let Message_Date = messages[i].id;
-    let Current_Date = new Date();
     let msgDate = new Date(Message_Date.replace(/-/g, "/"));
-    let tdyDate = new Date();
     let FinalMessage = "";
-    if (msgDate.toDateString() === tdyDate.toDateString()) {
+
+    let timeDiff = Current_Date - msgDate;
+    let dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); // Difference in days
+
+    if (dayDiff === 0) {
       FinalMessage = "Today";
+    } else if (dayDiff === 1) {
+      FinalMessage = "Yesterday";
+    } else if (dayDiff <= 7 && msgDate.getMonth() === Current_Date.getMonth()) {
+      FinalMessage = `${dayDiff} days ago`;
     } else {
       FinalMessage = `${msgDate.getFullYear()}-${String(
         msgDate.getMonth() + 1
       ).padStart(2, "0")}-${String(msgDate.getDate()).padStart(2, "0")}`;
     }
+
     FinalMessage += `, ${Message_Date.substring(11, 16)}`;
     messages[i].textContent = FinalMessage;
   }
