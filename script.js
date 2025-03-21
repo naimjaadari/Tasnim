@@ -436,7 +436,7 @@ document.querySelectorAll(".message").forEach((message) => {
 });
 
 function ClickedMessage(e) {
-  ClickSoundEffect();
+  POPSoundEffect();
   const event = e || window.event;
   const messageEl = event.currentTarget;
   const rect = messageEl.getBoundingClientRect();
@@ -632,6 +632,10 @@ function ClickedMessage(e) {
 
 function ClickSoundEffect() {
   let audio = new Audio("backup/clickeffect.wav");
+  audio.play();
+}
+function POPSoundEffect() {
+  let audio = new Audio("backup/POP.mp3");
   audio.play();
 }
 let black_screen_IsOpen = false;
