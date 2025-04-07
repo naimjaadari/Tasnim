@@ -167,19 +167,45 @@
       <h1 class="Body_Title">Memories</h1>
       <div id="Memoriesbg"></div>
       <div id="Photos_Container">
-        <div id="Photo1">
-          <img onclick="OpenPhoto('Photo1')" src="Memories/Jerry.jpg" />
+        <div id="Photo1" class="MemoriesPhotos">
+          <img
+            aria-label="Jerry"
+            onclick="OpenPhoto('Photo1')"
+            src="Memories/Jerry.jpg"
+          />
         </div>
-        <div id="Photo2">
-          <img onclick="OpenPhoto('Photo2')" src="Memories/Tas.png" />
+        <div id="Photo2" class="MemoriesPhotos">
+          <img
+            aria-label="Tasnim"
+            onclick="OpenPhoto('Photo2')"
+            src="Memories/Tas.png"
+          />
         </div>
-        <div id="Photo3">
-          <img onclick="OpenPhoto('Photo3')" src="Memories/Me.png" />
+        <div id="Photo3" class="MemoriesPhotos">
+          <img
+            aria-label="Me"
+            onclick="OpenPhoto('Photo3')"
+            src="Memories/Me.png"
+          />
         </div>
-        <div id="Photo4">
-          <video controls onclick="OpenPhoto('Photo4')">
+        <div id="Video1" class="MemoriesVideos">
+          <video controls onclick="OpenPhoto('Video1')">
             <source src="Memories/LoveYou.mp4" type="video/mp4" />
           </video>
+        </div>
+        <div id="Photo5" class="MemoriesPhotos">
+          <img
+            title="Could be Us?"
+            onclick="OpenPhoto('Photo5')"
+            src="Memories/Jerry2.jpg"
+          />
+        </div>
+        <div id="Photo6" class="MemoriesPhotos">
+          <img
+            title="&hearts;"
+            onclick="OpenPhoto('Photo6')"
+            src="Memories/flowers.jpg"
+          />
         </div>
       </div>
     </div>
