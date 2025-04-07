@@ -1,3 +1,9 @@
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 @font-face {
   font-family: "ArabicFont";
   src: url("backup/alfont_com_LANTX-Bold.otf") format("truetype");
@@ -267,14 +273,20 @@ header {
   transition: 0.2s;
 }
 
-#Photo1,
-#Photo2,
-#Photo3,
-#Photo4 {
-  transition: order 0.5s ease;
+#Photo1 {
+  width: 100%;
+  filter: grayscale(0);
 }
-#Photo4 {
-  width: 20%;
+.MemoriesPhotos {
+  transition: 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  filter: grayscale(1);
+}
+.MemoriesVideos {
+  width: 10%;
   height: 100%;
 }
 video {
@@ -372,28 +384,6 @@ video:fullscreen {
 #Photos_Container:hover {
   opacity: 1;
   transform: scale(1.1);
-}
-#Photo1 {
-  width: 60%;
-  filter: grayscale(0);
-}
-
-#Photo2 {
-  width: 20%;
-  filter: grayscale(1);
-}
-
-#Photo3 {
-  width: 20%;
-  filter: grayscale(1);
-}
-#Photo1,
-#Photo2,
-#Photo3 {
-  transition: 0.25s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 #Photos_Container img {
@@ -627,9 +617,7 @@ video:fullscreen {
   align-items: center;
   justify-content: flex-start;
 }
-* {
-  user-select: none;
-}
+
 #Level_Container {
   position: absolute;
   width: 92vw;
@@ -1033,8 +1021,7 @@ video:fullscreen {
   animation-play-state: running;
 }
 
-
-#black_screen{
+#black_screen {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -1042,6 +1029,5 @@ video:fullscreen {
   background: black;
   opacity: 0;
   display: none;
-  transition: .5s;
-
+  transition: 0.5s;
 }
