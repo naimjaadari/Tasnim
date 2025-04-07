@@ -379,10 +379,10 @@ function OpenPhoto(PhotoId) {
     for (let i = 0; i < Container.childElementCount; i++) {
       var child = Container.children[i];
       if (child.id != PhotoId) {
-        child.style.width = "20%";
+        child.style.width = "10%";
         child.style.filter = "grayscale(100%)";
       } else {
-        child.style.width = "60%";
+        child.style.width = "100%";
         child.style.filter = "grayscale(0)";
       }
     }
