@@ -47,26 +47,30 @@ updateTimer();
 var HeaderisOpen = false;
 
 function Appear_Header() {
-  var header = document.getElementById("Main_Header");
+  var Menu = document.getElementById("Menu");
   var Button = document.getElementById("Menu_Button");
   var mubtn = document.getElementById("Music_Button");
   var chatbtn = document.getElementById("Chat_Button");
-  ClickSoundEffect();
-  if (!HeaderisOpen) {
-    header.style.top = "1vh";
-    Button.style.display = "none";
-    HeaderisOpen = true;
-    mubtn.style.left = "2vw";
-    chatbtn.style.left = "2vw";
-    chatbtn.style.top = "11vh";
+
+  if (chatIsOpen || musicIsOpen || SettingsIsOpen) {
+    chatIsOpen = false;
+    musicIsOpen = false;
+    SettingsIsOpen = false;
+    document.querySelector(".Settings").style.transform =
+      "translate(-50%, -50%) scale(0)";
+    CloseElement(document.getElementById("music_player"));
+    CloseElement(document.getElementById("message_container"));
   } else {
-    header.style.top = "-15vh";
-    Button.style.display = "block";
-    HeaderisOpen = false;
-    mubtn.style.left = "calc(5vw + 6vmin)";
-    chatbtn.style.left = "calc(7vw + 12vmin)";
-    chatbtn.style.top = "3vh";
+    Appear_Black_Screen();
   }
+  if (!HeaderisOpen) {
+    Menu.style.transform = "translate(-50%,-50%) scale(1)";
+    HeaderisOpen = true;
+  } else {
+    Menu.style.transform = "translate(-50%, -50%) scale(0)";
+    HeaderisOpen = false;
+  }
+  ClickSoundEffect();
 }
 var chatIsOpen = false;
 var rot = 90;
@@ -97,11 +101,19 @@ function Appear_Chat() {
   var header = document.getElementById("message_container");
   if (buttonClicked) return;
   buttonClicked = true;
-  if (musicIsOpen == true) {
+
+  if (musicIsOpen || HeaderisOpen || SettingsIsOpen) {
     musicIsOpen = false;
-    CloseElement(document.getElementById("music_player"));
-    document.getElementById("Music_Button").style.transform =
-      "rotate(0deg) scale(1)";
+    HeaderisOpen = false;
+    SettingsIsOpen = false;
+    document.querySelector(".Settings").style.transform =
+      "translate(-50%, -50%) scale(0)";
+    document.getElementById("Menu").style.transform =
+      "translate(-50%, -50%) scale(0)";
+
+    if (musicIsOpen) {
+      CloseElement(document.getElementById("music_player"));
+    }
   } else {
     Appear_Black_Screen();
   }
@@ -114,11 +126,61 @@ function Appear_Chat() {
     CloseElement(header);
     chatIsOpen = false;
   } else {
-    AppearElement(header);
+    header.style.transform = "translate(-50%, -50%) scale(0)";
+    header.style.opacity = "0";
+    header.style.boxShadow = "0 5px 15px rgba(255, 105, 180, 0.1)";
+    header.style.display = "block";
+    setTimeout(function () {
+      header.style.transform = "translate(-50%, -50%) scale(1)";
+      header.style.opacity = "1";
+      header.style.boxShadow = "0 10px 30px rgba(255, 105, 180, 0.2)";
+    }, 10);
     chatIsOpen = true;
   }
 }
+var SettingsIsOpen = false;
+function Appear_Settings() {
+  ClickSoundEffect();
+  var header = document.querySelector(".Settings");
+  if (buttonClicked) return;
+  buttonClicked = true;
 
+  if (musicIsOpen || HeaderisOpen || chatIsOpen) {
+    musicIsOpen = false;
+    HeaderisOpen = false;
+    chatIsOpen = false;
+    document.getElementById("Menu").style.transform =
+      "translate(-50%, -50%) scale(0)";
+    if (musicIsOpen) {
+      CloseElement(document.getElementById("music_player"));
+    }
+    if (chatIsOpen) {
+      CloseElement(document.getElementById("message_container"));
+    }
+  } else {
+    Appear_Black_Screen();
+  }
+
+  setTimeout(function () {
+    buttonClicked = false;
+  }, 500);
+
+  if (SettingsIsOpen) {
+    CloseElement(header);
+    SettingsIsOpen = false;
+  } else {
+    header.style.transform = "translate(-50%, -50%) scale(0)";
+    header.style.opacity = "0";
+    header.style.boxShadow = "0 5px 15px rgba(255, 105, 180, 0.1)";
+    header.style.display = "block";
+    setTimeout(function () {
+      header.style.transform = "translate(-50%, -50%) scale(1)";
+      header.style.opacity = "1";
+      header.style.boxShadow = "0 10px 30px rgba(255, 105, 180, 0.2)";
+    }, 10);
+    SettingsIsOpen = true;
+  }
+}
 var musicIsOpen = false;
 function Appear_MusicPlayer() {
   ClickSoundEffect();
@@ -126,8 +188,14 @@ function Appear_MusicPlayer() {
   var button = document.getElementById("Music_Button");
   if (buttonClicked) return;
   buttonClicked = true;
-  if (chatIsOpen) {
+  if (chatIsOpen || HeaderisOpen) {
     chatIsOpen = false;
+    HeaderisOpen = false;
+    SettingsIsOpen = false;
+    document.querySelector(".Settings").style.transform =
+      "translate(-50%, -50%) scale(0)";
+    document.getElementById("Menu").style.transform =
+      "translate(-50%, -50%) scale(0)";
     CloseElement(document.getElementById("message_container"));
   } else {
     Appear_Black_Screen();
@@ -142,14 +210,6 @@ function Appear_MusicPlayer() {
   } else {
     AppearElement(header);
     musicIsOpen = true;
-  }
-  if (musicIsOpen) {
-    rot = rot === 90 ? -90 : 90;
-    var ch = `rotate(${rot}deg) scale(1.5)`;
-    button.style.transform = ch;
-  } else {
-    var ch = `rotate(0deg) scale(1)`;
-    button.style.transform = ch;
   }
 }
 
@@ -197,10 +257,11 @@ function ChangeFuture() {
 
   if (ok) {
     ok = false;
-    Element.textContent = "";
+    Element.setAttribute("dir", "ltr");
+    Element.innerHTML = (i + 1).toString() + "<br>";
     for (let j = 0; j < T[i].length; j++) {
       setTimeout(() => {
-        Element.textContent += T[i][j];
+        Element.innerHTML += T[i][j];
         if (j === T[i].length - 1) {
           ok = true;
           if (i + 1 >= T.length) {
@@ -250,19 +311,41 @@ window.addEventListener("message", async function (event) {
 // Music Player
 document.addEventListener("DOMContentLoaded", () => {
   const musicList = [
+    {
+      title: "Hikaru Nara",
+      file: "backup/file_music/HikaruNaru.mp3",
+    },
+    {
+      title: "Little Me",
+      file: "backup/file_music/LittleMe.mp3",
+    },
+    {
+      title: "JENNIE - like JENNIE",
+      file: "backup/file_music/LikeJennie.mp3",
+    },
+    {
+      title: "Let It Go - Frozen",
+      file: "backup/file_music/let.mp3",
+    },
+    {
+      title: "The First Time in Forever - Frozen",
+      file: "backup/file_music/for.mp3",
+    },
+    {
+      title: "Show Yourself - Frozen 2",
+      file: "backup/file_music/show.mp3",
+    },
+    {
+      title: "Into The Unknow - Frozen 2",
+      file: "backup/file_music/into.mp3",
+    },
+
     { title: "ROSE & Bruno Mars - APT", file: "backup/file_music/apt.mp3" },
     {
       title: "Rewrite the stars",
       file: "backup/file_music/Rewrite_the_stars.mp3",
     },
-    {
-      title: "The Night We Met",
-      file: "backup/file_music/The_Night_We_Met.mp3",
-    },
-    {
-      title: "Years And Years - Breathe",
-      file: "backup/file_music/Breathe.mp3",
-    },
+
     { title: "Yung kai - blue", file: "backup/file_music/blue.mp3" },
     {
       title: "Die With A Smile",
@@ -295,6 +378,16 @@ document.addEventListener("DOMContentLoaded", () => {
       musicListElement.appendChild(li);
     });
   }
+  const volumeSlider = document.getElementById("volume-slider");
+
+  volumeSlider.addEventListener("input", () => {
+    if (currentAudio) {
+      currentAudio.volume = parseFloat(volumeSlider.value);
+    }
+    let volumeText = "Music [" + (volumeSlider.value * 100).toFixed(0) + "%]";
+    document.getElementById("Music_Text_Volume").innerHTML = volumeText;
+  });
+
   function playTrack(index) {
     if (currentAudio) {
       currentAudio.pause();
@@ -307,6 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const track = musicList[index];
     currentAudio = new Audio();
     currentAudio.src = track.file;
+    currentAudio.volume = parseFloat(volumeSlider.value);
     currentAudio.addEventListener("ended", () => {
       playNextTrack();
     });
@@ -369,25 +463,6 @@ document.addEventListener("DOMContentLoaded", () => {
   populateMusicList();
 });
 
-var OpenedPhotoId = "Photo1";
-
-function OpenPhoto(PhotoId) {
-  ClickSoundEffect();
-  if (PhotoId != OpenedPhotoId) {
-    OpenedPhotoId = PhotoId;
-    var Container = document.getElementById("Photos_Container");
-    for (let i = 0; i < Container.childElementCount; i++) {
-      var child = Container.children[i];
-      if (child.id != PhotoId) {
-        child.style.width = "10%";
-        child.style.filter = "grayscale(100%)";
-      } else {
-        child.style.width = "100%";
-        child.style.filter = "grayscale(0)";
-      }
-    }
-  }
-}
 function LoadTimes() {
   let messageContent = document.getElementById("message_content");
   requestAnimationFrame(() => {
@@ -631,13 +706,14 @@ function ClickedMessage(e) {
 }
 
 function ClickSoundEffect() {
-  let audio = new Audio("backup/clickeffect.wav");
-  audio.play();
+  const audio1 = new Audio("backup/clickeffect.wav");
+  audio1.play();
 }
 function POPSoundEffect() {
-  let audio = new Audio("backup/POP.mp3");
+  const audio = new Audio("backup/POP.mp3");
   audio.play();
 }
+
 let black_screen_IsOpen = false;
 
 function Appear_Black_Screen() {
@@ -654,5 +730,227 @@ function Appear_Black_Screen() {
     setTimeout(() => {
       fade.style.opacity = 0.8;
     }, 0);
+  }
+}
+
+function Close_All() {
+  if (musicIsOpen) {
+    Appear_MusicPlayer();
+  } else if (chatIsOpen) {
+    Appear_Chat();
+  } else if (HeaderisOpen) {
+    Appear_Header();
+  } else if (SettingsIsOpen) {
+    Appear_Settings();
+  }
+}
+
+const trackers = document.querySelectorAll(".tracker");
+const glowingDivs = document.querySelectorAll("#card .glowing-elements div");
+const card = document.getElementById("card");
+const prompt = document.getElementById("prompt");
+const title = document.getElementById("Memorie-Title");
+const container = document.querySelector(".container");
+const cardGlare = card.querySelector(".card-glare");
+const cardInfo = card.querySelector(".card-info");
+const cornerElementsSpans = card.querySelectorAll(".corner-elements span");
+const cardParticlesSpans = card.querySelectorAll(".card-particles span");
+
+trackers.forEach((tracker) => {
+  tracker.addEventListener("mouseenter", () => {
+    glowingDivs.forEach((div) => {
+      if (HoverEffect) {
+        div.style.opacity = "0.5";
+      }
+    });
+  });
+
+  tracker.addEventListener("mouseleave", () => {
+    glowingDivs.forEach((div) => {
+      div.style.opacity = "";
+    });
+  });
+});
+
+trackers.forEach((tracker) => {
+  tracker.addEventListener("mouseenter", () => {
+    if (HoverEffect) {
+      if (FadeOnPhoto) {
+        prompt.style.opacity = "0.2";
+      } else {
+        prompt.style.opacity = "1";
+      }
+    }
+  });
+
+  tracker.addEventListener("mouseleave", () => {
+    prompt.style.opacity = "";
+  });
+});
+
+trackers.forEach((tracker) => {
+  tracker.addEventListener("mouseenter", () => {
+    if (HoverEffect) {
+      title.style.opacity = "1";
+      title.style.transform = "translateY(-10px)";
+    }
+  });
+
+  tracker.addEventListener("mouseleave", () => {
+    title.style.opacity = "";
+    title.style.transform = "";
+  });
+});
+
+container.addEventListener("mouseenter", () => {
+  if (HoverEffect) {
+    container.style.width = "500px";
+    container.style.height = "500px";
+  }
+});
+
+container.addEventListener("mouseleave", () => {
+  container.style.width = "";
+  container.style.height = "";
+});
+
+card.addEventListener("mouseenter", () => {
+  if (HoverEffect) {
+    cardGlare.style.opacity = "1";
+  }
+});
+
+card.addEventListener("mouseleave", () => {
+  cardGlare.style.opacity = "";
+});
+
+card.addEventListener("mouseenter", () => {
+  if (HoverEffect) {
+    cardInfo.style.opacity = "1";
+  }
+});
+
+card.addEventListener("mouseleave", () => {
+  cardInfo.style.opacity = "";
+});
+
+card.addEventListener("mouseenter", () => {
+  if (HoverEffect) {
+    cornerElementsSpans.forEach((span) => {
+      span.style.borderColor = "deeppink";
+    });
+    card.style.boxShadow = "0 0 30px black";
+  }
+});
+
+card.addEventListener("mouseleave", () => {
+  cornerElementsSpans.forEach((span) => {
+    span.style.borderColor = "";
+  });
+  card.style.boxShadow = "";
+});
+
+trackers.forEach((tracker) => {
+  tracker.addEventListener("mouseenter", () => {
+    cardParticlesSpans.forEach((span) => {
+      if (Partickles) {
+        const dx = Math.floor(Math.random() * 200 - 100);
+        const dy = Math.floor(Math.random() * 200 - 100);
+        span.style.setProperty("--dx", dx);
+        span.style.setProperty("--dy", dy);
+
+        const duration = (2 + Math.random() * 2).toFixed(2);
+        span.style.animation = `particleFloat ${duration}s infinite ease-in-out`;
+      }
+    });
+  });
+
+  tracker.addEventListener("mouseleave", () => {
+    cardParticlesSpans.forEach((span) => {
+      span.style.animation = "";
+    });
+  });
+});
+
+const rotations = [
+  { x: 20, y: -10 },
+  { x: 20, y: -5 },
+  { x: 20, y: 0 },
+  { x: 20, y: 5 },
+  { x: 20, y: 10 },
+  { x: 10, y: -10 },
+  { x: 10, y: -5 },
+  { x: 10, y: 0 },
+  { x: 10, y: 5 },
+  { x: 10, y: 10 },
+  { x: 0, y: -10 },
+  { x: 0, y: -5 },
+  { x: 0, y: 0 },
+  { x: 0, y: 5 },
+  { x: 0, y: 10 },
+  { x: -10, y: -10 },
+  { x: -10, y: -5 },
+  { x: -10, y: 0 },
+  { x: -10, y: 5 },
+  { x: -10, y: 10 },
+  { x: -20, y: -10 },
+  { x: -20, y: -5 },
+  { x: -20, y: 0 },
+  { x: -20, y: 5 },
+  { x: -20, y: 10 },
+];
+
+trackers.forEach((tracker, index) => {
+  tracker.addEventListener("mouseenter", () => {
+    if (MouseTracker) {
+      const rotation = rotations[index];
+      card.style.transition = "125ms ease-in-out";
+      card.style.transform = `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(0deg)`;
+    }
+  });
+
+  tracker.addEventListener("mouseleave", () => {
+    card.style.transition = "125ms ease-in-out";
+    card.style.transform = "";
+  });
+});
+
+Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg"];
+Lab = [
+  "NAIM<br>JAADARI",
+  "TASNIM<br>DRAOUIL",
+  "FLOWERS",
+  "Jerry <br> X<br>Coffe",
+  "Could Be <br><span class='highlight2'>Us?</span>",
+];
+x = -1;
+function Next() {
+  x = x + 1;
+  document.getElementById("memorie").src = "Memories/" + Mem[x];
+  document.getElementById("Memorie-Title").innerHTML = Lab[x];
+  if (x >= Mem.length - 1) {
+    x = -1;
+  }
+}
+
+let HoverEffect = true;
+let MouseTracker = true;
+let FadeOnPhoto = true;
+let Partickles = true;
+function TurnOnOff(ch) {
+  let id = "checkbox" + ch;
+  console.log(id);
+  if (ch === "IFM") {
+    MouseTracker = document.getElementById(id).checked;
+    console.log(MouseTracker);
+  } else if (ch == "IHE") {
+    HoverEffect = document.getElementById(id).checked;
+    console.log(HoverEffect);
+  } else if (ch == "PP") {
+    Partickles = document.getElementById(id).checked;
+    console.log(Partickles);
+  } else if (ch == "FOH") {
+    FadeOnPhoto = document.getElementById(id).checked;
+    console.log(FadeOnPhoto);
   }
 }
