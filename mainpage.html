@@ -92,12 +92,12 @@
 
   <body onload="LoadTimes()">
     <div id="black_screen" onclick="Close_All()"></div>
-
+    <!-- 
     <div id="loading-screen">
       <div class="spinner-heart"></div>
       <div class="loading-text">Loading...</div>
     </div>
-    <!-- 
+    
     Just To Remember To Add A Video:
    <div class="message"> Don't Change This Line
         <video class = "msg_video" controls allowfullscreen> Don't Change This Line
@@ -208,7 +208,7 @@
           <span class="Settings-Button span"></span>
           <span class="Settings-Button span"></span>
           <span class="fab Settings-Button span"
-            ><img src="backup/icons/settings.png" alt=""
+            ><img src="backup/icons/Settings.png" alt=""
           /></span>
         </div>
         <div class="button-name" id="Settings-Text">Settings</div>
@@ -223,7 +223,10 @@
     <div id="Memories">
       <h1 class="Body_Title">Memories</h1>
       <div id="Memoriesbg"></div>
-      <div class="container noselect" onclick="Next(); POPSoundEffect()">
+      <div
+        class="container noselect"
+        onclick="Next(); POPSoundEffect(); ClickedMessage2(event)"
+      >
         <div class="canvas">
           <div class="tracker tr-1"></div>
           <div class="tracker tr-2"></div>
@@ -427,7 +430,19 @@
               type="checkbox"
               id="checkboxFOH"
               checked
-              onclick="TurnOnOff('FOH')"
+              onclick="TurnOnOff('FOH')" 
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <span class="setting-name">Image Click Effect</span>
+          <label class="toggle-switch">
+            <input
+              type="checkbox"
+              id="checkboxICE"
+              checked
+              onclick="TurnOnOff('ICE')"
             />
             <span class="slider"></span>
           </label>
@@ -485,7 +500,7 @@
           والله تولي تحفة
           <div class="message_time" id="2025-03-07-18:02"></div>
         </div>
-        <div class="message" onclick="ClickedMessage(event)">
+        <div class="message">
           <video class="msg_video" controls allowfullscreen>
             <source src="Memories/LoveYou.mp4" type="video/mp4" />
           </video>
