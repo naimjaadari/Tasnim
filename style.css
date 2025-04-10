@@ -329,7 +329,31 @@ video:fullscreen {
   color: black;
   transition: 0.2s;
 }
-
+#Game {
+  z-index: 1;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-family: "Poppins";
+  font-weight: 700;
+  color: black;
+  transition: 0.2s;
+}
+#Gamebg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: url("backup/gamebg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(10px);
+}
 #Homebg {
   position: absolute;
   width: 100%;
@@ -1224,6 +1248,13 @@ img {
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
   font-size: 22px;
 }
+#Game-Text {
+  background: linear-gradient(#d3d3d3, #91cbcb);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
+  font-size: 22px;
+}
 
 .Home-Button {
   background: radial-gradient(#ffffff, #08aeff);
@@ -1248,6 +1279,10 @@ img {
 .Chat-Button {
   background: radial-gradient(#ffa86b, #6a4e23);
   border: 2px solid #482e08;
+}
+.Game-Button {
+  background: radial-gradient(#91cbcb, #2e6f6f);
+  border: 2px solid #317474;
 }
 .Settings-Button {
   background: radial-gradient(#d3d3d3, #5f4b3b);
@@ -1909,9 +1944,158 @@ input:checked + .slider:before {
     #ff3385
   ); /* More intense gradient on active */
 }
-
-/* Focus effect (when the slider is focused) */
 #volume-slider:focus {
   outline: none;
-  box-shadow: 0 0 8px 3px rgba(255, 102, 178, 0.5); /* Focus glow effect */
+  box-shadow: 0 0 8px 3px rgba(255, 102, 178, 0.5);
+}
+
+.containergame {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  background-color: #fff5f85d;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 20px rgba(255, 105, 180, 0.2);
+  text-align: center;
+  width: 80%;
+  max-width: 600px;
+  position: absolute;
+  border: 3px solid #2d93ff;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+#h1game {
+  color: #2d93ff;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 0 #006ac6;
+}
+
+.statsgame {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+}
+
+.statsgame div {
+  background-color: #00a2ffad;
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.word-display {
+  font-size: 2rem;
+  margin: 30px 0;
+  min-height: 60px;
+  color: #ffffff;
+  font-weight: bold;
+  background: radial-gradient(#76cdff, #00a2ff);
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.2);
+}
+
+.input-areagame {
+  margin-bottom: 20px;
+}
+
+#input_game {
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border: 3px solid #007dc6;
+  border-radius: 15px;
+  width: 70%;
+  text-align: center;
+  outline: none;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+}
+
+#input_game:focus {
+  border-color: #007dc6;
+}
+
+.button_game {
+  background-color: #00a2ff;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin: 10px;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-weight: bold;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
+.button_game:hover {
+  background-color: #0078be;
+}
+
+.button_game:active {
+  transform: translateY(2px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #00a2ff;
+  opacity: 0.7;
+  position: absolute;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+  }
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: #58c2ff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background-color: #00a2ff;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
+}
+
+.character {
+  display: inline-block;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.character.pop {
+  transform: scale(1.5);
+  color: deeppink;
+}
+
+.result {
+  font-size: 1.5rem;
+  color: #00a2ff;
+  font-weight: bold;
+  margin: 15px 0;
+  min-height: 40px;
+}
+
+.timer {
+  font-size: 1.8rem;
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
