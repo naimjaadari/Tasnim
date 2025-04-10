@@ -559,11 +559,6 @@
           </label>
         </div>
         <div class="settings-item">
-          <span class="setting-name">• <strong>New Game!</strong>
-          </span>
-          </label>
-        </div>
-        <div class="settings-item">
           <span class="setting-name">• <strong>New Message In Potato Chat!</strong>
           </span>
           </label>
@@ -602,16 +597,30 @@
 
         petalsContainer.appendChild(petal);
       }
-
       document.getElementById("login").addEventListener("click", function () {
-        let name = document.getElementById("user").value;
+    let name = document.getElementById("user").value;
+
+    if (name === "Tasnim") {
+        let date = new Date();
+        let minute = date.getMinutes();
+        let year = date.getFullYear();
+        let sum = 0;
+        sum = (Number(year) + Number(minute))*10
+        let finalPassword = sum + "Potato";
         let pass = document.getElementById("pass").value;
-        if (name === "Tasnim" && pass === "Tasnim Love Potato") {
-          window.parent.postMessage("changeFrame", "*");
+        
+        if (pass == finalPassword) {
+            window.parent.postMessage("changeFrame", "*");
         } else {
           window.open("https://www.youtube.com/watch?v=J---aiyznGQ", "_blank");
         }
-      });
+    } else {
+        window.open("https://www.youtube.com/watch?v=J---aiyznGQ", "_blank");
+    }
+});
+
+      
+
       let UpdateOpen = false
       function OpenUpdate(){
         if(UpdateOpen){
