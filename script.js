@@ -983,11 +983,6 @@ trackers.forEach((tracker) => {
   });
 });
 
-  tracker.addEventListener("mouseleave", () => {
-    prompt.style.opacity = "";
-  });
-});
-
 trackers.forEach((tracker) => {
   tracker.addEventListener("mouseenter", () => {
     if (HoverEffect) {
