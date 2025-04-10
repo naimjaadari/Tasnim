@@ -1110,23 +1110,34 @@ trackers.forEach((tracker, index) => {
   });
 });
 
-Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg"];
-Lab = [
+let Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg"];
+let Lab = [
   "NAIM<br>JAADARI",
   "TASNIM<br>DRAOUIL",
   "FLOWERS",
   "Jerry <br> X<br>Coffe",
   "Could Be <br><span class='highlight2'>Us?</span>",
 ];
-x = -1;
+
+// Preload images
+let preloadedImages = [];
+Mem.forEach(function (imgName) {
+  let img = new Image();
+  img.src = "Memories/" + imgName;
+  preloadedImages.push(img);
+});
+
+let x = -1;
+
 function Next() {
   x = x + 1;
-  document.getElementById("memorie").src = "Memories/" + Mem[x];
+  document.getElementById("memorie").src = preloadedImages[x].src;
   document.getElementById("Memorie-Title").innerHTML = Lab[x];
   if (x >= Mem.length - 1) {
     x = -1;
   }
 }
+
 
 let HoverEffect = true;
 let MouseTracker = true;
