@@ -201,6 +201,18 @@
         </div>
         <div class="button-name" id="Chat-Text">Chat</div>
       </a>
+      <a href="#Game" class="icon" onclick="Appear_Header()">
+        <div class="layer">
+          <span class="Game-Button span"></span>
+          <span class="Game-Button span"></span>
+          <span class="Game-Button span"></span>
+          <span class="Game-Button span"></span>
+          <span class="fab Game-Button span"
+            ><img src="backup/icons/game.png" alt=""
+          /></span>
+        </div>
+        <div class="button-name" id="Game-Text">Game</div>
+      </a>
       <a href="#" class="icon" onclick="Appear_Settings()">
         <div class="layer">
           <span class="Settings-Button span"></span>
@@ -350,28 +362,46 @@
       <div id="FutureBg"></div>
       <p id="Input" onclick="ChangeFuture()">Click Me</p>
     </div>
-    <div id="Game1">
-      <div id="Game1_Bg"></div>
-      <div id="Level_Container">
-        <div class="Level_Game1" id="Level_Title0">1</div>
-        <div class="Level_Game1" id="Level_Title1">2</div>
-        <div class="Level_Game1" id="Level_Title2">3</div>
-        <div class="Level_Game1" id="Level_Title3">4</div>
-        <div class="Level_Game1" id="Level_Title4">5</div>
-        <div class="Level_Game1" id="Level_Title5">6</div>
-        <div class="Level_Game1" id="Level_Title6">7</div>
-        <div class="Level_Game1" id="Level_Title7">8</div>
-        <div class="Level_Game1" id="Level_Title8">9</div>
-        <div class="Level_Game1" id="Level_Title9">10</div>
+    <div id="Game">
+      <div id="Gamebg"></div>
+      <div class="containergame">
+      <h1 id="h1game">Speed Typing</h1>
+
+      <div class="statsgame">
+        <div id="wpm">WPM: 0</div>
+        <div id="accuracy">Accuracy: 100%</div>
+        <div id="score">Score: 0</div>
       </div>
-      <div id="Game1_Bar">
-        <div id="Real_Bar"></div>
+
+      <div class="timer" id="timer">Time: 60s</div>
+
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
       </div>
-      <iframe
-        title="Game_Frame"
-        id="Game_Frame"
-        src="backup/Pages/Level1.html"
-      ></iframe>
+
+      <div class="word-display" id="word-display">Press Start!</div>
+
+      <div class="input-areagame">
+        <input
+          type="text"
+          id="input_game"
+          placeholder="Type here..."
+          disabled
+        />
+      </div>
+
+      <button class="button_game" id="start-btn">Start Game</button>
+      <button class="button_game" id="reset-btn" style="display: none">
+        Play Again
+      </button>
+
+      <div class="result" id="result"></div>
+    </div>
+    </div>
+
+</div>
+
+      </div>
     </div>
     <div class="Settings">
       <div class="settings-title">✿ Settings ✿</div>
@@ -430,7 +460,7 @@
               type="checkbox"
               id="checkboxFOH"
               checked
-              onclick="TurnOnOff('FOH')" 
+              onclick="TurnOnOff('FOH')"
             />
             <span class="slider"></span>
           </label>
