@@ -705,6 +705,203 @@ function ClickedMessage(e) {
   }
 }
 
+function ClickedMessage2(e) {
+  if (ClickEffect == false) {
+    return;
+  }
+  POPSoundEffect();
+  const event = e || window.event;
+  const messageEl = event.currentTarget;
+  const rect = messageEl.getBoundingClientRect();
+  const isHeartClick =
+    event.clientX > rect.right - 30 && event.clientY > rect.bottom - 30;
+  if (isHeartClick) {
+    return;
+  }
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+  const colors = [
+    "#D8B4F8", // light lavender
+    "#C084FC", // soft violet
+    "#A855F7", // medium purple
+    "#9333EA", // vivid purple
+    "#7E22CE", // deep violet
+    "#9F7AEA", // pastel purple
+    "#B794F4", // calm purple
+  ];
+
+  const emojis = ["🎶", "💜", "☂️"];
+  const particleCount = 12;
+  const bubble = document.createElement("div");
+  bubble.style.position = "absolute";
+  bubble.style.left = `${x}px`;
+  bubble.style.top = `${y}px`;
+  bubble.style.width = "60px";
+  bubble.style.height = "60px";
+  bubble.style.borderRadius = "50%";
+  bubble.style.background =
+    "radial-gradient(circle at 30% 30%, rgb(255, 166, 255),#9b59b6)";
+  bubble.style.boxShadow = "0px 0px 55px rgba(221, 0, 255, 0.9)";
+  bubble.style.transform = "translate(-50%, -50%) scale(0)";
+  bubble.style.opacity = "0.95";
+  bubble.style.zIndex = "1000";
+  bubble.style.pointerEvents = "none";
+  bubble.style.transition = "all 0.4s cubic-bezier(0.1, 0.8, 0.3, 1)";
+
+  try {
+    messageEl.appendChild(bubble);
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(1.3)";
+    }, 10);
+
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(1.1)";
+    }, 150);
+
+    setTimeout(() => {
+      bubble.style.transform = "translate(-50%, -50%) scale(0.8)";
+      bubble.style.opacity = "0";
+    }, 300);
+    const flash = document.createElement("div");
+    flash.style.position = "absolute";
+    flash.style.left = `${x}px`;
+    flash.style.top = `${y}px`;
+    flash.style.width = "100px";
+    flash.style.height = "100px";
+    flash.style.borderRadius = "50%";
+    flash.style.background =
+      "radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%)";
+    flash.style.transform = "translate(-50%, -50%) scale(0)";
+    flash.style.opacity = "0.7";
+    flash.style.zIndex = "998";
+    flash.style.pointerEvents = "none";
+    flash.style.transition = "all 0.3s ease-out";
+    messageEl.appendChild(flash);
+
+    setTimeout(() => {
+      flash.style.transform = "translate(-50%, -50%) scale(1.5)";
+      flash.style.opacity = "0";
+    }, 10);
+
+    setTimeout(() => {
+      if (flash.parentNode === messageEl) {
+        messageEl.removeChild(flash);
+      }
+    }, 300);
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("div");
+      const size = Math.random() * 15 + 10;
+      const angle = Math.random() * Math.PI * 2;
+      const distance = Math.random() * 60 + 40;
+      const duration = Math.random() * 800 + 600;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const isEmoji = Math.random() > 0.5;
+
+      if (isEmoji) {
+        const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+        particle.innerHTML = emoji;
+        particle.style.fontSize = `${size}px`;
+      } else {
+        particle.innerHTML = "♥";
+        particle.style.fontSize = `${size}px`;
+      }
+
+      particle.style.position = "absolute";
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+      particle.style.color = color;
+      particle.style.textShadow = "0px 0px 5px rgba(255, 90, 233, 0.7)";
+      particle.style.transform = "translate(-50%, -50%) scale(0) rotate(0deg)";
+      particle.style.transformOrigin = "center center";
+      particle.style.opacity = "0.95";
+      particle.style.zIndex = "999";
+      particle.style.pointerEvents = "none";
+      particle.style.transition = `all ${duration}ms cubic-bezier(0.1, 0.8, 0.3, 1)`;
+
+      messageEl.appendChild(particle);
+      const rotation = (Math.random() - 0.5) * 60;
+
+      setTimeout(() => {
+        const targetX = x + Math.cos(angle) * distance;
+        const targetY = y + Math.sin(angle) * distance - 20;
+        particle.style.left = `${targetX}px`;
+        particle.style.top = `${targetY}px`;
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.5 + 0.8
+        }) rotate(${rotation}deg)`;
+      }, 10);
+
+      setTimeout(() => {
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.3 + 0.7
+        }) rotate(${rotation + 10}deg)`;
+      }, duration / 3);
+
+      setTimeout(() => {
+        particle.style.opacity = "0";
+        particle.style.transform = `translate(-50%, -50%) scale(${
+          Math.random() * 0.2 + 0.5
+        }) rotate(${rotation + 20}deg)`;
+      }, (duration * 2) / 3);
+
+      setTimeout(() => {
+        if (particle.parentNode === messageEl) {
+          messageEl.removeChild(particle);
+        }
+      }, duration);
+    }
+
+    setTimeout(() => {
+      for (let i = 0; i < 8; i++) {
+        const sparkle = document.createElement("div");
+        const sparkleSize = Math.random() * 5 + 3;
+        const sparkleAngle = Math.random() * Math.PI * 2;
+        const sparkleDistance = Math.random() * 30 + 20;
+        const sparkleDuration = Math.random() * 400 + 300;
+
+        sparkle.innerHTML = "✦";
+        sparkle.style.position = "absolute";
+        sparkle.style.left = `${x}px`;
+        sparkle.style.top = `${y}px`;
+        sparkle.style.fontSize = `${sparkleSize}px`;
+        sparkle.style.color = "white";
+        sparkle.style.textShadow = "0px 0px 3px rgba(255, 215, 0, 0.8)";
+        sparkle.style.transform = "translate(-50%, -50%) scale(0)";
+        sparkle.style.opacity = "0.9";
+        sparkle.style.zIndex = "997";
+        sparkle.style.pointerEvents = "none";
+        sparkle.style.transition = `all ${sparkleDuration}ms ease-out`;
+
+        messageEl.appendChild(sparkle);
+
+        setTimeout(() => {
+          const targetX = x + Math.cos(sparkleAngle) * sparkleDistance;
+          const targetY = y + Math.sin(sparkleAngle) * sparkleDistance;
+          sparkle.style.left = `${targetX}px`;
+          sparkle.style.top = `${targetY}px`;
+          sparkle.style.transform = "translate(-50%, -50%) scale(1)";
+        }, 50);
+
+        setTimeout(() => {
+          sparkle.style.opacity = "0";
+        }, sparkleDuration / 2);
+
+        setTimeout(() => {
+          if (sparkle.parentNode === messageEl) {
+            messageEl.removeChild(sparkle);
+          }
+        }, sparkleDuration);
+      }
+    }, 100);
+    setTimeout(() => {
+      if (bubble.parentNode === messageEl) {
+        messageEl.removeChild(bubble);
+      }
+    }, 900);
+  } catch (error) {
+    console.error("Error in ClickedMessage:", error);
+  }
+}
 function ClickSoundEffect() {
   const audio1 = new Audio("backup/clickeffect.wav");
   audio1.play();
@@ -937,20 +1134,18 @@ let HoverEffect = true;
 let MouseTracker = true;
 let FadeOnPhoto = true;
 let Partickles = true;
+let ClickEffect = true;
 function TurnOnOff(ch) {
   let id = "checkbox" + ch;
-  console.log(id);
   if (ch === "IFM") {
     MouseTracker = document.getElementById(id).checked;
-    console.log(MouseTracker);
   } else if (ch == "IHE") {
     HoverEffect = document.getElementById(id).checked;
-    console.log(HoverEffect);
   } else if (ch == "PP") {
     Partickles = document.getElementById(id).checked;
-    console.log(Partickles);
   } else if (ch == "FOH") {
     FadeOnPhoto = document.getElementById(id).checked;
-    console.log(FadeOnPhoto);
+  } else if (ch == "ICE") {
+    ClickEffect = document.getElementById(id).checked;
   }
 }
