@@ -971,14 +971,17 @@ trackers.forEach((tracker) => {
 
 trackers.forEach((tracker) => {
   tracker.addEventListener("mouseenter", () => {
-    if (HoverEffect) {
-      if (FadeOnPhoto) {
-        prompt.style.opacity = "0.2";
-      } else {
-        prompt.style.opacity = "1";
-      }
+    if (FadeOnPhoto) {
+      prompt.style.opacity = "0.2";
+    } else {
+      prompt.style.opacity = "1";
     }
   });
+
+  tracker.addEventListener("mouseleave", () => {
+    prompt.style.opacity = "";
+  });
+});
 
   tracker.addEventListener("mouseleave", () => {
     prompt.style.opacity = "";
