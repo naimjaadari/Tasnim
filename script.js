@@ -1149,3 +1149,223 @@ function TurnOnOff(ch) {
     ClickEffect = document.getElementById(id).checked;
   }
 }
+
+// Game Settings
+const Words = [
+  "CUTE",
+  "TASNIM",
+  "GHOFRAN",
+  "HELLO",
+  "NAIM",
+  "IHEB",
+  "OREN",
+  "NAJM",
+  "STAR",
+  "LOVEU",
+  "FLOWERS",
+  "BALL",
+  "HOW",
+  "WATER",
+  "FOOD",
+  "WATERMELON",
+  "BEE",
+  "HONEY",
+  "NIGHT",
+  "MOON",
+  "SMILE",
+  "DREAM",
+  "CANDY",
+  "HEART",
+  "SNOW",
+  "BUTTERFLY",
+  "PROGRAMMER",
+  "SHINE",
+  "CLOUD",
+  "WAVES",
+  "STORY",
+  "BOOK",
+  "PENCIL",
+  "LINA",
+  "ONEPIECE",
+  "SOLOLEVELING",
+  "NARUTO",
+  "CAT",
+  "PEACE",
+  "PUPPY",
+  "LOVE",
+  "MOONLIGHT",
+  "FROZEN",
+  "SNOWMAN",
+  "TITO",
+  "TOTA",
+  "ROSI",
+  "TOY",
+];
+let currentWord = "";
+let score = 0;
+let wordsTyped = 0;
+let correctChars = 0;
+let totalChars = 0;
+let timeLeft = 60;
+let gameActive = false;
+let timer;
+const wordDisplay = document.getElementById("word-display");
+const inputField = document.getElementById("input_game");
+
+inputField.addEventListener("input", () => {
+  inputField.value = inputField.value.toUpperCase();
+});
+const startBtn = document.getElementById("start-btn");
+const resetBtn = document.getElementById("reset-btn");
+const result = document.getElementById("result");
+const wpmDisplay = document.getElementById("wpm");
+const accuracyDisplay = document.getElementById("accuracy");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+const progressBar = document.getElementById("progress");
+const containergame = document.querySelector(".containergame");
+
+function getRandomWord() {
+  return Words[Math.floor(Math.random() * Words.length)];
+}
+function displayWord(word) {
+  wordDisplay.innerHTML = "";
+  for (let i = 0; i < word.length; i++) {
+    const charSpan = document.createElement("span");
+    charSpan.className = "character";
+    charSpan.textContent = word[i];
+    wordDisplay.appendChild(charSpan);
+  }
+  currentWord = word;
+}
+function updateStats() {
+  const accuracy =
+    totalChars === 0 ? 100 : Math.round((correctChars / totalChars) * 100);
+  const wpm = Math.round((wordsTyped / (60 - timeLeft)) * 60) || 0;
+
+  wpmDisplay.textContent = `WPM: ${wpm}`;
+  accuracyDisplay.textContent = `Accuracy: ${accuracy}%`;
+  scoreDisplay.textContent = `Score: ${score}`;
+}
+function createBubbles() {
+  for (let i = 0; i < 15; i++) {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.top = `${Math.random() * 100}%`;
+    bubble.style.width = `${Math.random() * 30 + 10}px`;
+    bubble.style.height = bubble.style.width;
+    bubble.style.animationDuration = `${Math.random() * 10 + 5}s`;
+    bubble.style.animationDelay = `${Math.random() * 5}s`;
+    document.body.appendChild(bubble);
+  }
+}
+function createConfetti() {
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = `${Math.random() * 100}%`;
+    confetti.style.top = "-10px";
+    confetti.style.backgroundColor = [
+      "#ff69b4",
+      "#ffcce0",
+      "#88c0d0",
+      "#81a1c1",
+      "#a3be8c",
+    ][Math.floor(Math.random() * 5)];
+    confetti.style.width = `${Math.random() * 10 + 5}px`;
+    confetti.style.height = `${Math.random() * 10 + 5}px`;
+    confetti.style.borderRadius = Math.random() > 0.5 ? "50%" : "0";
+    confetti.style.animationDuration = `${Math.random() * 2 + 1}s`;
+    document.body.appendChild(confetti);
+
+    setTimeout(() => {
+      confetti.remove();
+    }, 3000);
+  }
+}
+function startGame() {
+  gameActive = true;
+  timeLeft = 60;
+  score = 0;
+  wordsTyped = 0;
+  correctChars = 0;
+  totalChars = 0;
+  inputField.disabled = false;
+  inputField.value = "";
+  inputField.focus();
+  startBtn.style.display = "none";
+  resetBtn.style.display = "none";
+  result.textContent = "";
+
+  updateStats();
+  displayWord(getRandomWord());
+
+  timer = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    progressBar.style.width = `${(timeLeft / 60) * 100}%`;
+
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
+}
+function endGame() {
+  gameActive = false;
+  clearInterval(timer);
+  inputField.disabled = true;
+  resetBtn.style.display = "inline-block";
+
+  const accuracy =
+    totalChars === 0 ? 100 : Math.round((correctChars / totalChars) * 100);
+  const wpm =
+    Math.round((wordsTyped / (60 - (timeLeft > 0 ? timeLeft : 60))) * 60) || 0;
+  wordDisplay.textContent = "Sa77aaaa!";
+
+  createConfetti();
+}
+function popCharacter(index) {
+  const characters = wordDisplay.querySelectorAll(".character");
+  if (characters[index]) {
+    characters[index].classList.add("pop");
+    setTimeout(() => {
+      characters[index].classList.remove("pop");
+    }, 200);
+  }
+}
+startBtn.addEventListener("click", startGame);
+resetBtn.addEventListener("click", () => {
+  startBtn.style.display = "inline-block";
+  resetBtn.style.display = "none";
+  wordDisplay.textContent = "Press Start to begin!";
+  timerDisplay.textContent = "Time: 60s";
+  progressBar.style.width = "100%";
+  updateStats();
+});
+
+inputField.addEventListener("input", (e) => {
+  if (!gameActive) return;
+
+  const typedText = e.target.value;
+  const currentLength = typedText.length;
+  if (currentLength > 0) {
+    popCharacter(currentLength - 1);
+  }
+  if (typedText === currentWord) {
+    for (let i = 0; i < typedText.length; i++) {
+      if (typedText[i] === currentWord[i]) {
+        correctChars++;
+      }
+    }
+    totalChars += currentWord.length;
+    score += currentWord.length * 2;
+    wordsTyped++;
+    inputField.value = "";
+    displayWord(getRandomWord());
+    updateStats();
+
+    createConfetti();
+  }
+});
+createBubbles();
