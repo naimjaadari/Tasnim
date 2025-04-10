@@ -89,13 +89,16 @@
       }
     </style>
   </head>
+
   <body onload="LoadTimes()">
-    <div id="black_screen"></div>
+    <div id="black_screen" onclick="Close_All()"></div>
+
     <div id="loading-screen">
       <div class="spinner-heart"></div>
       <div class="loading-text">Loading...</div>
     </div>
-    <!-- Just To Remember To Add A Video:
+    <!-- 
+    Just To Remember To Add A Video:
    <div class="message"> Don't Change This Line
         <video class = "msg_video" controls allowfullscreen> Don't Change This Line
           <source src="v1.mp4" type="video/mp4"> Change This
@@ -119,44 +122,98 @@
   -->
 
     <img
+      title="image"
       onclick="Appear_Header()"
-      src="backup/Menu_Button.png"
+      src="backup/icons/menu.png"
       id="Menu_Button"
     />
-    <img
-      onclick="Appear_MusicPlayer()"
-      src="backup/sound.png"
-      id="Music_Button"
-    />
-    <img onclick="Appear_Chat()" src="chat/letter.png" id="Chat_Button" />
-    <header id="Main_Header">
-      <div id="TitleBg">
-        <h1><a id="Title" onclick="Appear_Header()">Tasnim</a></h1>
-      </div>
-      <nav>
-        <div class="ButtonsTop">
-          <a onclick="Appear_Header()" class="Buttons" href="#Home">Home</a>
+    <div id="Menu">
+      <a href="#Home" class="icon" onclick="Appear_Header()">
+        <div class="layer">
+          <span class="Home-Button span"></span>
+          <span class="Home-Button span"></span>
+          <span class="Home-Button span"></span>
+          <span class="Home-Button span"></span>
+          <span class="fab Home-Button span"
+            ><img src="backup/icons/home.png" alt=""
+          /></span>
         </div>
-        <div class="ButtonsTop">
-          <a onclick="Appear_Header()" class="Buttons" href="#Memories"
-            >Memories</a
-          >
+        <div class="button-name" id="Home-Text">Home</div>
+      </a>
+      <a href="#Memories" class="icon" onclick="Appear_Header()">
+        <div class="layer">
+          <span class="Memories-Button span"></span>
+          <span class="Memories-Button span"></span>
+          <span class="Memories-Button span"></span>
+          <span class="Memories-Button span"></span>
+          <span class="fab Memories-Button span"
+            ><img src="backup/icons/memories.png" alt=""
+          /></span>
         </div>
-        <div class="ButtonsTop">
-          <a id="dat" onclick="Appear_Header()" class="Buttons" href="#"
-            >Dates</a
-          ><img class="lock" src="backup/lock.png" />
+        <div class="button-name" id="Memories-Text">Memories</div>
+      </a>
+
+      <a href="#Dates" class="icon" onclick="Appear_Header()">
+        <div class="layer">
+          <span class="Dates-Button span"></span>
+          <span class="Dates-Button span"></span>
+          <span class="Dates-Button span"></span>
+          <span class="Dates-Button span"></span>
+          <span class="fab Dates-Button span"
+            ><img src="backup/icons/dates.png" alt=""
+          /></span>
         </div>
-        <div class="ButtonsTop">
-          <a id="fut" onclick="Appear_Header()" class="Buttons" href="#"
-            >Future</a
-          ><img class="lock" src="backup/lock.png" />
+        <div class="button-name" id="Dates-Text">Dates</div>
+      </a>
+      <a href="#Future" class="icon" onclick="Appear_Header()">
+        <div class="layer">
+          <span class="Future-Button span"></span>
+          <span class="Future-Button span"></span>
+          <span class="Future-Button span"></span>
+          <span class="Future-Button span"></span>
+          <span class="fab Future-Button span"
+            ><img src="backup/icons/future.png" alt=""
+          /></span>
         </div>
-        <div class="ButtonsTop">
-          <a onclick="Appear_Header()" class="Buttons" href="#Game1">Game</a>
+        <div class="button-name" id="Future-Text">Future</div>
+      </a>
+      <a href="#" class="icon" onclick="Appear_MusicPlayer()">
+        <div class="layer">
+          <span class="Music-Button span"></span>
+          <span class="Music-Button span"></span>
+          <span class="Music-Button span"></span>
+          <span class="Music-Button span"></span>
+          <span class="fab Music-Button span"
+            ><img src="backup/icons/sound.png" alt=""
+          /></span>
         </div>
-      </nav>
-    </header>
+        <div class="button-name" id="Music-Text">Music</div>
+      </a>
+      <a href="#" class="icon" onclick="Appear_Chat()">
+        <div class="layer">
+          <span class="Chat-Button span"></span>
+          <span class="Chat-Button span"></span>
+          <span class="Chat-Button span"></span>
+          <span class="Chat-Button span"></span>
+          <span class="fab Chat-Button span"
+            ><img src="backup/icons/chat.png" alt=""
+          /></span>
+        </div>
+        <div class="button-name" id="Chat-Text">Chat</div>
+      </a>
+      <a href="#" class="icon" onclick="Appear_Settings()">
+        <div class="layer">
+          <span class="Settings-Button span"></span>
+          <span class="Settings-Button span"></span>
+          <span class="Settings-Button span"></span>
+          <span class="Settings-Button span"></span>
+          <span class="fab Settings-Button span"
+            ><img src="backup/icons/Settings.png" alt=""
+          /></span>
+        </div>
+        <div class="button-name" id="Settings-Text">Settings</div>
+      </a>
+    </div>
     <div id="Home">
       <div id="Homebg"></div>
       <h1 id="Timer">00:00:00:00</h1>
@@ -166,46 +223,72 @@
     <div id="Memories">
       <h1 class="Body_Title">Memories</h1>
       <div id="Memoriesbg"></div>
-      <div id="Photos_Container">
-        <div id="Photo1" class="MemoriesPhotos">
-          <img
-            aria-label="Jerry"
-            onclick="OpenPhoto('Photo1')"
-            src="Memories/Jerry.jpg"
-          />
-        </div>
-        <div id="Photo2" class="MemoriesPhotos">
-          <img
-            aria-label="Tasnim"
-            onclick="OpenPhoto('Photo2')"
-            src="Memories/Tas.png"
-          />
-        </div>
-        <div id="Photo3" class="MemoriesPhotos">
-          <img
-            aria-label="Me"
-            onclick="OpenPhoto('Photo3')"
-            src="Memories/Me.png"
-          />
-        </div>
-        <div id="Video1" class="MemoriesVideos">
-          <video controls onclick="OpenPhoto('Video1')">
-            <source src="Memories/LoveYou.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div id="Photo5" class="MemoriesPhotos">
-          <img
-            title="Could be Us?"
-            onclick="OpenPhoto('Photo5')"
-            src="Memories/Jerry2.jpg"
-          />
-        </div>
-        <div id="Photo6" class="MemoriesPhotos">
-          <img
-            title="&hearts;"
-            onclick="OpenPhoto('Photo6')"
-            src="Memories/flowers.jpg"
-          />
+      <div class="container noselect" onclick="Next(); POPSoundEffect()">
+        <div class="canvas">
+          <div class="tracker tr-1"></div>
+          <div class="tracker tr-2"></div>
+          <div class="tracker tr-3"></div>
+          <div class="tracker tr-4"></div>
+          <div class="tracker tr-5"></div>
+          <div class="tracker tr-6"></div>
+          <div class="tracker tr-7"></div>
+          <div class="tracker tr-8"></div>
+          <div class="tracker tr-9"></div>
+          <div class="tracker tr-10"></div>
+          <div class="tracker tr-11"></div>
+          <div class="tracker tr-12"></div>
+          <div class="tracker tr-13"></div>
+          <div class="tracker tr-14"></div>
+          <div class="tracker tr-15"></div>
+          <div class="tracker tr-16"></div>
+          <div class="tracker tr-17"></div>
+          <div class="tracker tr-18"></div>
+          <div class="tracker tr-19"></div>
+          <div class="tracker tr-20"></div>
+          <div class="tracker tr-21"></div>
+          <div class="tracker tr-22"></div>
+          <div class="tracker tr-23"></div>
+          <div class="tracker tr-24"></div>
+          <div class="tracker tr-25"></div>
+
+          <div id="card">
+            <div class="card-content">
+              <div class="card-glare"></div>
+              <div class="cyber-lines">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <p id="prompt"><img src="#" alt="" id="memorie" /></p>
+
+              <div id="Memorie-Title">
+                Click <br />
+                Me
+              </div>
+              <div class="glowing-elements">
+                <div class="glow-1"></div>
+                <div class="glow-2"></div>
+                <div class="glow-3"></div>
+                <div class="glow-4"></div>
+              </div>
+              <div class="subtitle">
+                <div class="card-info">
+                  <span>OUR</span><br />
+                  <span class="highlight">MEMORIES</span>
+                </div>
+              </div>
+              <div class="card-particles">
+                <span></span><span></span><span></span> <span></span
+                ><span></span><span></span> <span></span><span></span
+                ><span></span> <span></span><span></span><span></span>
+                <span></span><span></span><span></span> <span></span
+                ><span></span><span></span> <span></span><span></span
+                ><span></span> <span></span><span></span><span></span>
+              </div>
+              <div class="corner-elements">
+                <span></span><span></span><span></span><span></span>
+              </div>
+              <div class="scan-line"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -281,9 +364,76 @@
       <div id="Game1_Bar">
         <div id="Real_Bar"></div>
       </div>
-      <iframe id="Game_Frame" src="backup/Pages/Level1.html"></iframe>
+      <iframe
+        title="Game_Frame"
+        id="Game_Frame"
+        src="backup/Pages/Level1.html"
+      ></iframe>
     </div>
-
+    <div class="Settings">
+      <div class="settings-title">✿ Settings ✿</div>
+      <div id="settings-container">
+        <div class="settings-item">
+          <span class="setting-name" id="Music_Text_Volume">Music [100]</span>
+          <input
+            type="range"
+            id="volume-slider"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+          />
+        </div>
+        <div class="settings-item">
+          <span class="setting-name">Image Follows Mouse</span>
+          <label class="toggle-switch">
+            <input
+              type="checkbox"
+              id="checkboxIFM"
+              checked
+              onclick="TurnOnOff('IFM')"
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <span class="setting-name">Image Hover Effect</span>
+          <label class="toggle-switch">
+            <input
+              type="checkbox"
+              id="checkboxIHE"
+              checked
+              onclick="TurnOnOff('IHE')"
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <span class="setting-name">Photo Particles</span>
+          <label class="toggle-switch">
+            <input
+              type="checkbox"
+              id="checkboxPP"
+              checked
+              onclick="TurnOnOff('PP')"
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="settings-item">
+          <span class="setting-name">Image Fade On Hover</span>
+          <label class="toggle-switch">
+            <input
+              type="checkbox"
+              id="checkboxFOH"
+              checked
+              onclick="TurnOnOff('FOH')"
+            />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
     <div id="music_player">
       <div class="heart-decoration heart-1">❤</div>
       <div class="heart-decoration heart-2">❤</div>
@@ -293,19 +443,19 @@
       <ul class="music-list" id="music-list"></ul>
 
       <div class="controls">
-        <button class="control-btn prev-btn" id="prev-btn">
+        <button class="control-btn prev-btn" id="prev-btn" title="Previues">
           <svg viewBox="0 0 24 24">
             <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
           </svg>
         </button>
 
-        <button class="control-btn play-btn" id="play-btn">
+        <button class="control-btn play-btn" id="play-btn" title="Play">
           <svg viewBox="0 0 24 24" id="play-icon">
             <path d="M8 5v14l11-7z" />
           </svg>
         </button>
 
-        <button class="control-btn next-btn" id="next-btn">
+        <button class="control-btn next-btn" id="next-btn" title="Next">
           <svg viewBox="0 0 24 24">
             <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
           </svg>
@@ -317,11 +467,11 @@
       <div class="title">Potato Chat</div>
       <div id="message_content">
         <div class="message" onclick="ClickedMessage(event)">
-          Hetha Awel Message Bch ntesty bih el chat W'hahou ye5dem :) <br />
+          Hetha Awel Message Bch ntesty bih el chat W'hahou ye5dem :&#40;<br />
           El mohem tw na3melek Tal5is 3la Fekret el Potato Chat: <br />
           1- 7awli t5ali el date mt3 el pc s7i7 bch wa9et el message ykoun s7i7
           zeda <br />
-          2- Lel Asef ma tnajmich Tektbi fil chat :( <br />
+          2- Lel Asef ma tnajmich Tektbi fil chat :&#40;<br />
           (5ater y7ibelha barcha wa9et ama tw n7awel na3malha fil mosta9bel)
           <br />
           3- Tnajmi tetfa3li m3a el message bel click (kabes kabes) <br />
@@ -334,6 +484,17 @@
           يقبلها، عندي برشة افكار نحب نزيدها زي انو نولي نبعث تصاور والا فيديوات
           والله تولي تحفة
           <div class="message_time" id="2025-03-07-18:02"></div>
+        </div>
+        <div class="message">
+          <video class="msg_video" controls allowfullscreen>
+            <source src="Memories/LoveYou.mp4" type="video/mp4" />
+          </video>
+          تصورت الي بش نبقى ساعتين والا ثلاثة ياخي رصتلي قاعد مال7 متع لعشية
+          <div class="message_time" id="2025-04-10-01:27"></div>
+        </div>
+        <div class="message" onclick="ClickedMessage(event)">
+          كيمي دايو كييمنااانديووو اوشيي ايتييي كوريتااااااا
+          <div class="message_time" id="2025-04-10-03:43"></div>
         </div>
       </div>
     </div>
