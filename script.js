@@ -1,15 +1,22 @@
 var TimerLabel = document.getElementById("Timer");
 
+
+
+
+function padWithZero(number) {
+  return number.toString().padStart(2, "0");
+}
 var FirstDay = 11;
 var FirstMonth = 4;
 var FirstYear = 2024;
+var FirstHour = 22;
 
-function padWithZero(value) {
-  return value < 10 ? "0" + value : value;
+function padWithZero(number) {
+  return number.toString().padStart(2, "0");
 }
 
-function timeFromDate(day, month, year) {
-  var givenDate = new Date(year, month - 1, day);
+function timeFromDate(day, month, year, hour) {
+  var givenDate = new Date(year, month - 1, day, hour); // includes hour
   var currentDate = new Date();
   var differenceInMilliseconds = Math.abs(currentDate - givenDate);
 
@@ -33,16 +40,13 @@ function timeFromDate(day, month, year) {
   return `${years} : ${remainingDays} : ${hours} : ${minutes} : ${seconds}`;
 }
 
-function padWithZero(number) {
-  return number.toString().padStart(2, "0");
-}
-
 function updateTimer() {
-  TimerLabel.textContent = timeFromDate(FirstDay, FirstMonth, FirstYear);
+  TimerLabel.textContent = timeFromDate(FirstDay, FirstMonth, FirstYear, FirstHour);
 }
 
 setInterval(updateTimer, 1000);
 updateTimer();
+
 
 var HeaderisOpen = false;
 
