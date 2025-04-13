@@ -1114,13 +1114,15 @@ trackers.forEach((tracker, index) => {
   });
 });
 
-let Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg"];
+let Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg", "firstgroup.jpg", "mawjetsa3ada.jpg"];
 let Lab = [
   "NAIM<br>JAADARI",
   "TASNIM<br>DRAOUIL",
   "FLOWERS",
   "Jerry <br> X<br>Coffe",
   "Could Be <br><span class='highlight2'>Us?</span>",
+  "First <br> Group",
+  "Mawjet <br> Sa3ada :)"
 ];
 
 // Preload images
@@ -1169,7 +1171,6 @@ const Words = [
   "TASNIM",
   "GHOFRAN",
   "HELLO",
-  "NAIM",
   "IHEB",
   "OREN",
   "NAJM",
