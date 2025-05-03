@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasnim</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @font-face {
+        font-family: "Janna";
+        src: url("backup/Janna.ttf") format("truetype");
+      }
+
+      body {
+        font-family: "Garamond", serif;
+        background-color: #fff0f5;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff99cc' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+      }
+
+      .love-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0.5rem auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .floating-heart {
+        position: absolute;
+        color: #ff6699;
+        font-size: 1.5rem;
+        animation: floatHeart 15s linear infinite;
+        opacity: 0.6;
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(100vh) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.7;
+        }
+        90% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-20vh) translateX(20px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .love-header {
+        text-align: center;
+        margin-bottom: 0.5rem;
+        position: relative;
+      }
+
+      .love-title {
+        font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+        font-size: 2rem;
+        background: linear-gradient(45deg, #ff3399, #ff99cc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 2px 2px 4px rgba(255, 102, 153, 0.3);
+        animation: pulse 2s infinite;
+        position: relative;
+        display: inline-block;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      .love-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(255, 102, 153, 0.2),
+          0 0 50px rgba(255, 102, 153, 0.1),
+          inset 0 0 30px rgba(255, 102, 153, 0.05);
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 0.5rem;
+        border: 2px solid rgba(255, 153, 204, 0.5);
+      }
+
+      .love-card::before {
+        content: "";
+        position: absolute;
+        top: -50px;
+        left: -50px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 153, 204, 0.5),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+
+      .love-card::after {
+        content: "";
+        position: absolute;
+        bottom: -50px;
+        right: -50px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 153, 204, 0.5),
+          transparent 70%
+        );
+        border-radius: 50%;
+      }
+
+      .love-content {
+        font-family: "Janna";
+        line-height: 2;
+        font-size: 1.3rem;
+        color: #555;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+      }
+
+      .love-content br {
+        margin-bottom: 0.8rem;
+      }
+
+      .heart-bullet {
+        color: #ff6699;
+        margin-right: 5px;
+        display: inline-block;
+        animation: beatHeart 1s infinite alternate;
+      }
+
+      @keyframes beatHeart {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      .love-footer {
+        text-align: center;
+        position: relative;
+        font-family: "Janna";
+      }
+
+      .love-footer::before {
+        content: "";
+        display: block;
+        width: 200px;
+        height: 2px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          #ff99cc,
+          transparent
+        );
+        margin: 0 auto 1rem;
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 3px;
+        height: 1.3em;
+        background-color: #ff6699;
+        margin-left: 2px;
+        animation: blink 1s infinite;
+        vertical-align: middle;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .corner-heart {
+        position: absolute;
+        font-size: 3rem;
+        color: #ff99cc;
+        opacity: 0.4;
+        z-index: 1;
+      }
+
+      .corner-heart.top-left {
+        top: 1rem;
+        left: 1rem;
+        transform: rotate(-20deg);
+      }
+
+      .corner-heart.top-right {
+        top: 1rem;
+        right: 1rem;
+        transform: rotate(20deg);
+      }
+
+      .corner-heart.bottom-left {
+        bottom: 1rem;
+        left: 1rem;
+        transform: rotate(-40deg);
+      }
+
+      .corner-heart.bottom-right {
+        bottom: 1rem;
+        right: 1rem;
+        transform: rotate(40deg);
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        filter: blur(1px);
+        animation: sparkle 4s infinite;
+      }
+
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+
+      .ribbon {
+        position: absolute;
+        top: -10px;
+        right: 30px;
+        width: 20px;
+        height: 70px;
+        background: linear-gradient(to right, #ff6699, #ff99cc);
+        z-index: 10;
+        border-radius: 0 0 10px 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .ribbon::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 20px;
+        height: 10px;
+        background-color: #ff3377;
+        border-radius: 0 0 10px 10px;
+      }
+
+      .love-border {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        border: 3px solid transparent;
+        border-image: linear-gradient(45deg, #ff99cc, #ff3399, #ff99cc);
+        border-image-slice: 1;
+        border-radius: 18px;
+        pointer-events: none;
+      }
+
+      .emoji {
+        display: inline-block;
+        transform: scale(1.2);
+        margin: 0 3px;
+      }
+
+      @media (max-width: 768px) {
+        .love-container {
+          margin: 1rem;
+          width: calc(100% - 2rem);
+        }
+
+        .love-title {
+          font-size: 2.2rem;
+        }
+
+        .love-card {
+          padding: 1.5rem;
+        }
+
+        .love-content {
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floating-hearts"></div>
+
+    <div class="love-container">
+      <div class="love-header">
+        <h1 class="love-title">10</h1>
+      </div>
+
+      <div class="love-card">
+        <div class="corner-heart top-left">♥</div>
+        <div class="corner-heart top-right">♥</div>
+        <div class="corner-heart bottom-left">♥</div>
+        <div class="corner-heart bottom-right">♥</div>
+        <div class="ribbon"></div>
+        <div class="love-border"></div>
+
+        <div class="love-content" id="typed-content">
+          <br />
+          <span class="heart-bullet">♥</span> نقول لأولادنا الي امهم احسن طفلة
+          عرفتها فحياتي <br />
+          <span class="heart-bullet">♥</span> نقلوللهم الي هيا الوحيدة الي كي
+          نحكي معاها مانخممش شنو نقول <br />
+          <span class="heart-bullet">♥</span> الوحيدة الي الكلام معاها يكون عفوي
+          <br />
+          <span class="heart-bullet">♥</span> اسلوبها فالكلام، مواضيعها، افكارها
+          يخلوني نهتم لكل كلمة تقولها
+          <br />
+          <span class="heart-bullet">♥</span> لدرجة انو من نهار الي بلوكتني فيه
+          واني نقرا في اخر كلام حكيناه
+          <br />
+          <span class="heart-bullet">♥</span> وبش نبقى نقراه ان شاء الله
+          <br />
+          <span class="heart-bullet">♥</span> نقوللهم الي امهم استعرفت في اخر
+          نهار
+          <br />
+          <span class="heart-bullet">♥</span> <span class="emoji">💗</span> اخر
+          نهار كان اول نهار تقول فيه مشاعرها الكل
+          <br />
+          <span class="heart-bullet">♥</span> نقوللهم الي امهم اختارت تصبر 10
+          والا 20 عام بش نجي نخطبها
+          <br />
+          <span class="heart-bullet">♥</span> <span class="emoji">🙃</span> رغم
+          انو نعرفها ماتحبش تصبر <br />
+          <span class="heart-bullet">♥</span> وبالرسمي زدت حبيتها اكثر من قبل
+          <br />
+          <span class="heart-bullet">♥</span> نقول لأولادنا الي كنت ندعي في كل
+          صلاة بش نجمت ناخذ امهم <br />
+          <span class="heart-bullet">♥</span>(ان شاء الله)
+          <span class="heart-bullet">♥</span>
+          <span class="cursor"></span>
+        </div>
+      </div>
+
+      <div class="love-footer">
+        <p>وَلَسَوْفَ يُعْطِيكَ رَبُّكَ فَتَرْضَى <br />💗🙃 تفائلي</p>
+      </div>
+    </div>
+
+    <script>
+      function createFloatingHearts() {
+        const container = document.querySelector(".floating-hearts");
+        const hearts = ["♥", "♡", "💕", "💗", "💓"];
+        for (let i = 0; i < 20; i++) {
+          const heart = document.createElement("div");
+          heart.className = "floating-heart";
+          heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+          const left = Math.random() * 100;
+          heart.style.left = `${left}%`;
+          const size = Math.random() * 1.5 + 0.8;
+          heart.style.fontSize = `${size}rem`;
+          const duration = Math.random() * 15 + 10;
+          heart.style.animationDuration = `${duration}s`;
+          const delay = Math.random() * 10;
+          heart.style.animationDelay = `${delay}s`;
+
+          container.appendChild(heart);
+        }
+      }
+      function createSparkles() {
+        const card = document.querySelector(".love-card");
+        for (let i = 0; i < 15; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.className = "sparkle";
+          const top = Math.random() * 100;
+          const left = Math.random() * 100;
+          sparkle.style.top = `${top}%`;
+          sparkle.style.left = `${left}%`;
+          const size = Math.random() * 5 + 2;
+          sparkle.style.width = `${size}px`;
+          sparkle.style.height = `${size}px`;
+          const delay = Math.random() * 4;
+          sparkle.style.animationDelay = `${delay}s`;
+          card.appendChild(sparkle);
+        }
+      }
+      window.onload = function () {
+        createFloatingHearts();
+        createSparkles();
+      };
+    </script>
+  </body>
+</html>
