@@ -1,26 +1,14 @@
-var TimerLabel = document.getElementById("Timer");
-
-
-
-
-function padWithZero(number) {
-  return number.toString().padStart(2, "0");
-}
-var FirstDay = 11;
-var FirstMonth = 4;
-var FirstYear = 2024;
-var FirstHour = 22;
-
 function padWithZero(number) {
   return number.toString().padStart(2, "0");
 }
 
-function timeFromDate(day, month, year, hour) {
-  var givenDate = new Date(year, month - 1, day, hour); // includes hour
+// Common function to calculate elapsed time
+function timeFromDate(day, month, year, hour, includeYears = true) {
+  var givenDate = new Date(year, month - 1, day, hour);
   var currentDate = new Date();
-  var differenceInMilliseconds = Math.abs(currentDate - givenDate);
+  var diff = Math.abs(currentDate - givenDate);
 
-  var totalSeconds = Math.floor(differenceInMilliseconds / 1000);
+  var totalSeconds = Math.floor(diff / 1000);
   var totalMinutes = Math.floor(totalSeconds / 60);
   var totalHours = Math.floor(totalMinutes / 60);
   var totalDays = Math.floor(totalHours / 24);
@@ -31,22 +19,62 @@ function timeFromDate(day, month, year, hour) {
   var minutes = totalMinutes % 60;
   var seconds = totalSeconds % 60;
 
-  years = padWithZero(years);
-  remainingDays = padWithZero(remainingDays);
-  hours = padWithZero(hours);
-  minutes = padWithZero(minutes);
-  seconds = padWithZero(seconds);
+  // If includeYears is false, set years to 00
+  if (!includeYears) {
+    years = 0; // Explicitly set years to 0 if we don't need to show it
+  }
 
-  return `${years} : ${remainingDays} : ${hours} : ${minutes} : ${seconds}`;
+  if (includeYears) {
+    return `${padWithZero(years)} : ${padWithZero(
+      remainingDays
+    )} : ${padWithZero(hours)} : ${padWithZero(minutes)} : ${padWithZero(
+      seconds
+    )}`;
+  } else {
+    return `${padWithZero(years)} : ${padWithZero(
+      remainingDays
+    )} : ${padWithZero(hours)} : ${padWithZero(minutes)} : ${padWithZero(
+      seconds
+    )}`;
+  }
 }
 
-function updateTimer() {
-  TimerLabel.textContent = timeFromDate(FirstDay, FirstMonth, FirstYear, FirstHour);
+// Timer 1 settings (ID: Timer)
+var FirstDay1 = 11;
+var FirstMonth1 = 4;
+var FirstYear1 = 2024;
+var FirstHour1 = 22;
+var TimerLabel1 = document.getElementById("Timer");
+
+// Timer 2 settings (ID: Timer2)
+var FirstDay2 = 18;
+var FirstMonth2 = 4;
+var FirstYear2 = 2025;
+var FirstHour2 = 7;
+var TimerLabel2 = document.getElementById("Timer2");
+
+function updateTimers() {
+  // Timer with years/days/hours...
+  TimerLabel1.textContent = timeFromDate(
+    FirstDay1,
+    FirstMonth1,
+    FirstYear1,
+    FirstHour1,
+    true
+  );
+
+  // Timer with just days/hours/minutes/seconds, years set to 00 if not displayed
+  TimerLabel2.textContent = timeFromDate(
+    FirstDay2,
+    FirstMonth2,
+    FirstYear2,
+    FirstHour2,
+    false
+  );
 }
 
-setInterval(updateTimer, 1000);
-updateTimer();
-
+setInterval(updateTimers, 1000);
+updateTimers();
 
 var HeaderisOpen = false;
 
@@ -251,9 +279,13 @@ var T = [
   "Frozen نتفرجو على",
   "نهديلك كتاب شعر ليك",
   "نسمو قطوسنا طيطو وقطوستنا طاطا ووردتنا روزي",
-  "نقول لأولادنا الي امهم بلوكتني مرتين وقعدت 4 شهور ماتحكيش معايا"
+  "نقول لأولادنا الي امهم بلوكتني مرتين وقعدت 4 شهور ماتحكيش معايا",
+  {
+    type: "link",
+    href: "LastOne.html",
+    text: "Last One 🙃💗",
+  },
 ];
-
 var ok = true;
 var i = 0;
 
@@ -262,18 +294,49 @@ function ChangeFuture() {
 
   if (ok) {
     ok = false;
-    Element.setAttribute("dir", "ltr");
-    Element.innerHTML = (i + 1).toString() + "<br>";
-    for (let j = 0; j < T[i].length; j++) {
-      setTimeout(() => {
-        Element.innerHTML += T[i][j];
-        if (j === T[i].length - 1) {
-          ok = true;
-          if (i + 1 >= T.length) {
-            i = 0;
-          } else {
-            i += 1;
+    Element.innerHTML = ""; // Clear previous content
+
+    let current = T[i];
+
+    // Create number line
+    let numberLine = document.createElement("div");
+    numberLine.textContent = (i + 1).toString();
+    numberLine.style.textAlign = "center"; // Center number
+    Element.appendChild(numberLine);
+
+    // Create a content container
+    let contentLine = document.createElement("div");
+    contentLine.style.textAlign = "center"; // Center content
+    Element.appendChild(contentLine);
+
+    // If it's a link object
+    if (typeof current === "object" && current.type === "link") {
+      let a = document.createElement("a");
+      a.href = current.href;
+      a.target = "_blank";
+      a.id = "NewTab";
+      contentLine.appendChild(a);
+
+      // Type the link text
+      for (let j = 0; j < current.text.length; j++) {
+        setTimeout(() => {
+          a.innerHTML += current.text[j];
+          if (j === current.text.length - 1) {
+            ok = true;
+            i = 0; // reset
           }
+        }, j * 25);
+      }
+      return;
+    }
+
+    // Otherwise: normal text typing
+    for (let j = 0; j < current.length; j++) {
+      setTimeout(() => {
+        contentLine.innerHTML += current[j];
+        if (j === current.length - 1) {
+          ok = true;
+          i = (i + 1) % T.length;
         }
       }, j * 50);
     }
@@ -1115,7 +1178,15 @@ trackers.forEach((tracker, index) => {
   });
 });
 
-let Mem = ["Me.png", "Tas.png", "flowers.jpg", "Jerry.jpg", "Jerry2.jpg", "firstgroup.jpg", "mawjetsa3ada.jpg"];
+let Mem = [
+  "Me.png",
+  "Tas.png",
+  "flowers.jpg",
+  "Jerry.jpg",
+  "Jerry2.jpg",
+  "firstgroup.jpg",
+  "mawjetsa3ada.jpg",
+];
 let Lab = [
   "NAIM<br>JAADARI",
   "TASNIM<br>DRAOUIL",
@@ -1123,7 +1194,7 @@ let Lab = [
   "Jerry <br> X<br>Coffe",
   "Could Be <br><span class='highlight2'>Us?</span>",
   "First <br> Group",
-  "Mawjet <br> Sa3ada :)"
+  "Mawjet <br> Sa3ada :)",
 ];
 
 // Preload images
@@ -1144,7 +1215,6 @@ function Next() {
     x = -1;
   }
 }
-
 
 let HoverEffect = true;
 let MouseTracker = true;
