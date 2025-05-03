@@ -8,7 +8,10 @@
   font-family: "ArabicFont";
   src: url("backup/alfont_com_LANTX-Bold.otf") format("truetype");
 }
-
+@font-face {
+  font-family: "Janna";
+  src: url("backup/Janna.ttf") format("truetype");
+}
 @font-face {
   font-family: "Poppins";
   src: url("backup/Poppins-Black.ttf") format("truetype");
@@ -377,23 +380,74 @@ video:fullscreen {
   justify-content: center;
   align-items: center;
 }
-#Timer {
+#Timer,
+#Timer2 {
   font-family: "Poppins";
-  color: #0094dd;
-  text-shadow: 0 0.8vmin #056fa4;
+  font-size: 5vmin;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+#Timer {
+  color: #068df4;
+  text-shadow: 0 0.8vmin #045fa5;
   cursor: pointer;
-  z-index: 1;
+  margin-bottom: 1.5vmin;
+  transition: 0.5s;
+}
+#Timer:hover {
+  color: #0091ff;
+  text-shadow: 0 0 2vmin #030055;
+  cursor: pointer;
+  margin-bottom: 1.5vmin;
+}
+#Timer2:hover {
+  color: #ffd900;
+  text-shadow: 0 0 2vmin #515500;
+  cursor: pointer;
+  margin-bottom: 1.5vmin;
+}
+#Timer2 {
+  color: #ffd900;
+  text-shadow: 0 0.8vmin #9b8509;
+  cursor: pointer;
+  margin-top: 3vmin;
+  margin-bottom: 1.5vmin;
+  transition: 0.5s;
+}
+a {
+  text-decoration: none;
+}
+#Paragraphe,
+#Paragraphe2 {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  width: 90%;
+  max-width: 800px;
+  z-index: 2;
 }
 
 #Paragraphe {
-  z-index: 1;
-  color: #056fa4;
+  color: #0091ff;
   font-family: "Popcat";
   letter-spacing: 1vmin;
-  text-shadow: 0 0.3vmin 0.5vmin #08aeff;
+  font-size: 4vmin;
+  text-shadow: 0 0.3vmin 0.5vmin #000000;
   cursor: default;
+  margin-bottom: 3vmin;
 }
 
+#Paragraphe2 {
+  font-weight: bold;
+  font-size: 5.5vmin;
+  color: #ffd900;
+  font-family: "Janna";
+  text-shadow: 0 0.5vmin #9b8509;
+  cursor: default;
+}
 #Photos_Container {
   z-index: 3;
   width: 80vmin;
@@ -550,23 +604,72 @@ video:fullscreen {
   background: rgba(245, 222, 179, 0.438);
   color: whitesmoke;
   width: fit-content;
-  text-shadow: 0 0 5px black;
-  max-width: fit-content;
+  max-width: 90vw;
   height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
   font-family: "ArabicFont";
   text-align: center;
   border: 2px solid white;
+  text-shadow: 0 0 5px black;
   z-index: 3;
   cursor: pointer;
   transition: 0.25s;
   padding: 3vmin 5vmin;
+  display: block; /* change from flex to block */
+  margin: 0 auto; /* center horizontally */
 }
+#NewTab {
+  color: rgb(255, 136, 0);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  font-family: "Popcat", sans-serif;
+  text-align: center;
+  z-index: 3;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 3vmin 5vmin;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  border-radius: 8px;
+  background: rgba(255, 136, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#NewTab:hover {
+  color: rgb(255, 180, 80);
+  background: rgba(255, 136, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+#NewTab:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#NewTab::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 136, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+#NewTab:hover::after {
+  opacity: 1;
+}
+
 #Input:hover {
   transform: scale(1.2);
   box-shadow: 0 0 10px black;
