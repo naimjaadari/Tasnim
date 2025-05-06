@@ -9,10 +9,28 @@ body {
   position: relative;
   margin: 0;
 }
-
+.cute-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 300px;
+  max-height: 400px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(255, 192, 203, 0.3);
+  overflow: hidden;
+  text-align: center;
+  z-index: 999;
+  transition: 0.3s;
+}
 .chat-container {
-  max-width: 40vw;
+  max-width: 90vw; /* Reduced from 40vw for mobile */
+  width: 40vw; /* Fixed width for desktop */
   height: 85vh;
+  max-height: 90vh; /* Added max-height for mobile */
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0px 25px rgba(255, 255, 255, 0.5);
   outline: none;
@@ -56,6 +74,39 @@ body {
   left: 73%;
   top: 50%;
 }
+#Chat_History_Button {
+  width: 3vmax;
+  height: 3vmax;
+  padding: 1vmax;
+  border-radius: 1vmax;
+  top: 15vmax;
+  margin-left: 1vmax;
+  position: absolute;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 18px rgba(255, 182, 220, 0.4);
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .chat-container {
+    width: 80vw;
+    max-width: 80vw;
+    height: auto;
+    max-height: 65vh;
+    border-radius: 4vmax;
+    padding: 3vmin;
+    top: 57%;
+  }
+  #UpDown-container {
+    top: 57%;
+    height: 75vh;
+    left: 95%;
+  }
+}
+
 #Up {
   transform: rotate(-90deg);
   width: 2.3vmax;
@@ -309,21 +360,7 @@ body {
   outline: none;
   border: none;
 }
-#Chat_History_Button {
-  width: 3vmax;
-  height: 3vmax;
-  padding: 1vmax;
-  border-radius: 1vmax;
-  top: 15vmax;
-  margin-left: 1vmax;
-  position: absolute;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 6px 18px rgba(255, 182, 220, 0.4);
-  outline: none;
-  border: none;
-  cursor: pointer;
-}
+
 #Chat_History_Button img {
   width: 100%;
 }
@@ -513,24 +550,6 @@ body {
   color: black;
   font-family: sans-serif;
   font-size: 1.2vmax;
-}
-
-.cute-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  width: 300px;
-  max-height: 400px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(5px);
-  border-radius: 20px;
-  padding: 20px;
-  box-shadow: 0 10px 25px rgba(255, 192, 203, 0.3);
-  overflow: hidden;
-  text-align: center;
-  z-index: 999;
-  transition: 0.3s;
 }
 
 .cute-title {
