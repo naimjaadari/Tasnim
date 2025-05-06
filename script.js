@@ -1209,6 +1209,7 @@ let x = -1;
 
 function Next() {
   x = x + 1;
+  document.getElementById("memorie").style.display = "block";
   document.getElementById("memorie").src = preloadedImages[x].src;
   document.getElementById("Memorie-Title").innerHTML = Lab[x];
   if (x >= Mem.length - 1) {
