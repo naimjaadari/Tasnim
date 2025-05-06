@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function clear_search() {
+function clear_search(ok) {
   let search = document.getElementById("search-input");
   search.readOnly = true;
   ch = search.value;
@@ -160,12 +160,16 @@ function clear_search() {
 let currentSearchIndex = -1;
 let currentMatches = [];
 
-function Search_Chat() {
+function Search_Chat(ok) {
   const searchInput = document.getElementById("search-input");
-  const searchText = searchInput.value.trim();
   const Found = document.getElementById("Found");
   const container = document.querySelector(".chat-container");
-
+  let searchText;
+  if (ok == "") {
+    searchText = searchInput.value.trim();
+  } else {
+    searchText = ok;
+  }
   if (!searchText) {
     Found.innerHTML = "Type Something...";
     return;
@@ -197,8 +201,12 @@ function Search_Chat() {
     }
   }
 
-  currentSearchIndex = (currentSearchIndex + 1) % currentMatches.length;
-  Found.innerHTML = currentSearchIndex + 1 + " / " + currentMatches.length;
+  if (ok == "") {
+    currentSearchIndex = (currentSearchIndex + 1) % currentMatches.length;
+    Found.innerHTML = currentSearchIndex + 1 + " / " + currentMatches.length;
+  } else {
+    currentSearchIndex = 0;
+  }
 
   const matchIndex = currentMatches[currentSearchIndex];
   const matchedMessage = messages[matchIndex];
@@ -255,13 +263,19 @@ function CloseScrollTo() {
   ScrollToOpened = false;
 }
 T = [
-  168208.796875, 797112.8125, 799233.625, 887221.625, 167206.40625, 853524.8125,
-  1404740.75,
+  "نحبك 🙃💗",
+  "توحشتك",
+  "تهني حبي 😔💗",
+  "حاسه في لخر بش ترصيلي نبيع بطاطا online",
+  "Aug 3, 2024 00:00",
+  "نخلوها في ليستت اول حاجات نعملوها بعد مانعرسو 🙂",
+  "كل مانجي نرقد تجيني موجة سعادة 🙂",
+  "W machrou3 lm3iz ch3malt fih😂",
 ];
 
 function ScrollTo(i) {
   const container = document.querySelector(".chat-container");
-  container.scrollTop = T[i];
+  Search_Chat(T[i]);
   CloseScrollTo();
 }
 
