@@ -27,10 +27,10 @@ body {
   transition: 0.3s;
 }
 .chat-container {
-  max-width: 90vw; /* Reduced from 40vw for mobile */
-  width: 40vw; /* Fixed width for desktop */
+  max-width: 90vw;
+  width: 40vw;
   height: 85vh;
-  max-height: 90vh; /* Added max-height for mobile */
+  max-height: 90vh;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0px 25px rgba(255, 255, 255, 0.5);
   outline: none;
@@ -153,15 +153,15 @@ body {
 
 .sent {
   background-color: #aee1f9;
-  margin-left: auto;
-  border-bottom-right-radius: 0.5vmax;
+  margin-right: auto;
+  border-bottom-left-radius: 0.5vmax;
   border: 2px solid #89d3f8;
 }
 
 .received {
   background-color: #ffd6eb;
-  margin-right: auto;
-  border-bottom-left-radius: 0.5vmax;
+  margin-left: auto;
+  border-bottom-right-radius: 0.5vmax;
   border: 2px solid #ffbdde;
 }
 
