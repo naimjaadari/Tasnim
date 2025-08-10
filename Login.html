@@ -582,15 +582,8 @@
     let name = document.getElementById("user").value;
 
     if (name === "Tasnim") {
-        let date = new Date();
-        let minute = date.getMinutes();
-        let year = date.getFullYear();
-        let sum = 0;
-        sum = (Number(year) + Number(minute))*10
-        let finalPassword = sum + "Potato";
         let pass = document.getElementById("pass").value;
-        
-        if (pass == finalPassword) {
+        if (pass == "N293582006T") {
             window.parent.postMessage("changeFrame", "*");
         } else {
           window.open("https://www.youtube.com/watch?v=J---aiyznGQ", "_blank");
