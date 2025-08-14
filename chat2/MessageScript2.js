@@ -112,6 +112,7 @@ let currentMatches = [];
 
 function Search_Chat(Message) {
   const searchInput = document.getElementById("search-input");
+  const searchText = searchInput.value.trim();
   const Found = document.getElementById("Found");
   const container = document.querySelector(".chat-container");
 
@@ -268,3 +269,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
